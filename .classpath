@@ -13,6 +13,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Bazar da Serra/git/T20WPS2/WebContent/WEB-INF/lib/jersey-core-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Aluno/Videos/Captures/Rodrigo T20WPS2/AluguelCarros/T20WPS2/WebContent/WEB-INF/lib/jersey-core-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/ojdbc6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
