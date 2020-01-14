@@ -15,6 +15,19 @@ public class Carro {
 	private TabelaPreco tbPreco;
 	
 	
+	public Carro() {
+	}
+	public Carro(Integer codCarro, String fabricante, String modelo, String ano, String cor, String chassi,
+			String placa) {
+
+		this.codCarro = codCarro;
+		this.fabricante = fabricante;
+		this.modelo = modelo;
+		this.ano = ano;
+		this.cor = cor;
+		this.chassi = chassi;
+		this.placa = placa;
+	}
 	//Getters and Setters
 	public String getFabricante() {
 		return fabricante;
