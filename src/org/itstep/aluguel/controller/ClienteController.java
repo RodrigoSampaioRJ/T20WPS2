@@ -21,10 +21,8 @@ public class ClienteController {
 	public Cliente buscaCliente (@Context HttpHeaders httpHeaders,
 								@PathParam ("codigo") Integer codigo) {
 		
-		Cliente cliente = new Cliente();
 		ClienteFacade clienteFacade = new ClienteFacade();
-		cliente = clienteFacade.buscaCliente(codigo);
-		
-		return cliente;
+	
+		return clienteFacade.buscaCliente(codigo);
 	}
 }

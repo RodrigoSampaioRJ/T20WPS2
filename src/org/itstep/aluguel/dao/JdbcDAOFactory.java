@@ -6,7 +6,7 @@ public class JdbcDAOFactory {
 	
 	private Connection connection;
 	
-	public JdbcDAOFactory() throws SQLException {
+	public JdbcDAOFactory() {
 		
 		try {
 			

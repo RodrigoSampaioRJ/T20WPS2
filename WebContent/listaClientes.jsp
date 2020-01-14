@@ -20,8 +20,8 @@
 			</tr>
 		
 			<tr>
-				<td>Nome</td>
-				<td> <input style="" type="text" id="idNome" name="nome" value=""></td>
+				<td>Modelo</td>
+				<td> <input style="" type="text" id="idModelo" name="modelo" value=""></td>
 			</tr>
 			
 			<tr>
