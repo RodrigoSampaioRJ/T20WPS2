@@ -38,11 +38,9 @@ public class CarroController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Carro> listaCarros(@Context HttpHeaders httpHeaders) {
-
 		
 		CarroFacade carroFacade = new CarroFacade();
-		
-
+	
 		return carroFacade.listaCarros();
 	}
 

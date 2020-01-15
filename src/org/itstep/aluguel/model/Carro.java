@@ -104,7 +104,8 @@ public class Carro {
 	public String toString() {
 		return "Modelo: " + this.modelo + "\n"
 				+ "Fabricante: " + this.fabricante + "\n"
-				+ "Placa: " + this.placa;
+				+ "Placa: " + this.placa + "\n"
+				+ "Código: " + this.codCarro;
 	}
 	
 	
