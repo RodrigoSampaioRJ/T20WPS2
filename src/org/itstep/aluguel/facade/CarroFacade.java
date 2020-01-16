@@ -13,7 +13,7 @@ public class CarroFacade {
 	
 	JdbcDAOFactory jdbc = new JdbcDAOFactory();
 
-	public Carro buscaCarro(Integer codCarro) throws SQLException {
+	public Carro buscaCarro(Integer codCarro) {
 	
 		Carro carro = new Carro();
 

@@ -25,11 +25,7 @@ public class CarroController {
 		Carro carro = null;
 		
 		CarroFacade carroFacade = new CarroFacade();
-		try {
-			carro = carroFacade.buscaCarro(codigo);
-		}catch(SQLException s) {
-			System.out.println("Erro: " + s.getMessage());
-		}
+		carro = carroFacade.buscaCarro(codigo);
 		
 		return carro;
 	}
