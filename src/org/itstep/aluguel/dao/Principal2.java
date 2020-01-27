@@ -19,7 +19,7 @@ public class Principal2 {
 		
 		CarroFacade carroFacade = new CarroFacade();
 		
-		for(Carro c : carroFacade.listaCarros()) {
+		for(Carro c : carroFacade.listaCarrosEconomicos()) {
 			System.out.println(c);
 			System.out.println();
 		}

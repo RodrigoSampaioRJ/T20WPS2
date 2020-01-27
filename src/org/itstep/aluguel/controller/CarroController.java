@@ -1,6 +1,5 @@
 package org.itstep.aluguel.controller;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -33,11 +32,24 @@ public class CarroController {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/lista")
 	public List<Carro> listaCarros(@Context HttpHeaders httpHeaders) {
 		
 		CarroFacade carroFacade = new CarroFacade();
 	
 		return carroFacade.listaCarros();
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/lista_carros_economicos")
+	public List<Carro> listaCarrosEconomicos(@Context HttpHeaders httpHeaders) {
+		
+		CarroFacade carroFacade = new CarroFacade();
+	
+		return carroFacade.listaCarrosEconomicos();
+	}
+	
+	
 
 }

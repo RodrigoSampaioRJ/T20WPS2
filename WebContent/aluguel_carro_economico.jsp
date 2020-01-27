@@ -6,23 +6,54 @@
 <meta charset="ISO-8859-1">
 <title>Aluguel de Carro Econômico</title>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<style>
+</style>
 </head>
 <body>
 
 	<form action="">
-
+		
 		<select name="tipoCarro" id="idTipoCarro" class="form-control"></select>
-		
-		<ol style="position: absolute; top: 100 px; left: 200 px;" name="tipoCarroOL" id="idTipoCarroOL" class="form-control"></ol>
-		
-		
-		
-
+		<button name="botaoOk" id="idBotao" class="form-control">OK</button>
+		<input  id="idValorCarro" class="form-control" value="valor"></input>
 	</form>
 </body>
 </html>
 
-<script type="text/javascript" src="js/aluguel_carro_economico.js"></script>
+<script type="text/javascript" src="js/aluguel_carro_economico.js">
+
+</script>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+
+	});
+	
+	var elementoCBX = $('#idTipoCarro option:selected').val();
+	
+	
+	function selecionaCarro(){
+		var idCarro = elementoCBX
+		
+	    $.ajax({
+	        type : "GET",
+	        url : "http://localhost:9080/AluguelCarros/aluguelRest/aluguel_carro_economico/lista_carros_economicos",
+	        data : idCarro, 
+	        dataType: 'json',
+	        contentType : 'application/json',
+	        success :  function(response) {
+	              $("#idValorCarro").val(response.valor)
+	        }
+	    });
+	}
+	
+	var botao = $('#idBotao')
+	
+	botao.onclick = selecionaCarro;
+	
+
+</script>
 
 
 
