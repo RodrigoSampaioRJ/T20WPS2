@@ -52,33 +52,7 @@
 	
 	botao.onclick = selecionaCarro;
 	
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- <script type="text/javascript"> --> 
