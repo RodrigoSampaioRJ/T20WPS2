@@ -19,7 +19,7 @@ public class CarroFacade {
 
 		try {
 
-			String sql = "SELECT COD_CARRO,ANO, CHASSI, COR, MODELO, FABRICANTE, PLACA FROM T20WPS2.tb_carro";
+			String sql = "SELECT COD_CARRO,ANO, CHASSI, COR, MODELO, FABRICANTE, PLACA, VALOR FROM T20WPS2.tb_carro";
 
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
 
@@ -36,6 +36,7 @@ public class CarroFacade {
 					carro.setChassi(rs.getString("CHASSI"));
 					carro.setPlaca(rs.getString("PLACA"));
 					carro.setCor(rs.getString("COR"));
+					carro.setValor(rs.getDouble("VALOR"));
 				}
 			}
 			rs.close();
@@ -55,7 +56,7 @@ public class CarroFacade {
 
 		try {
 			
-			String sql = "SELECT COD_CARRO,ANO, CHASSI, COR, MODELO, FABRICANTE, PLACA FROM T20WPS2.tb_carro";
+			String sql = "SELECT COD_CARRO,ANO, CHASSI, COR, MODELO, FABRICANTE, PLACA, VALOR FROM T20WPS2.tb_carro";
 
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
 
@@ -65,7 +66,7 @@ public class CarroFacade {
 			while (rs.next()) {
 				
 				listaCarros.add(new Carro(rs.getInt("COD_CARRO"), rs.getString("FABRICANTE"),rs.getString("MODELO"),
-						         rs.getString("ANO"),rs.getString("COR"), rs.getString("CHASSI"),rs.getString("PLACA")));			
+						         rs.getString("ANO"),rs.getString("COR"), rs.getString("CHASSI"),rs.getString("PLACA"), rs.getDouble("VALOR")));			
 			
 			}
 			rs.close();
@@ -75,6 +76,38 @@ public class CarroFacade {
 			System.out.println("Erro:" + e.getMessage());
 		}
 		return listaCarros;
+
+	}
+	
+	public List<Carro> listaCarrosEconomicos() {
+		
+		List<Carro> listaCarrosEconomicos = new ArrayList<Carro>();
+
+		try {
+			
+			String sql = "SELECT COD_CARRO,cc.descricao_carro,ANO, CHASSI, COR, MODELO, FABRICANTE, PLACA, VALOR FROM T20WPS2.tb_carro C JOIN T20WPS2.TB_CATEGORIA_CARRO CC\r\n" + 
+					"ON c.cod_categoria_carro = cc.cod_categoria_carro";
+
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			
+			//Buscando carros no banco e adicionando a lista
+			while (rs.next()) {
+				if(rs.getString("descricao_carro").equalsIgnoreCase("econômico")) {
+					listaCarrosEconomicos.add(new Carro(rs.getInt("COD_CARRO"), rs.getString("FABRICANTE"),rs.getString("MODELO"),
+					         rs.getString("ANO"),rs.getString("COR"), rs.getString("CHASSI"),rs.getString("PLACA"), rs.getDouble("VALOR")));
+				}
+							
+			
+			}
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.out.println("Erro:" + e.getMessage());
+		}
+		return listaCarrosEconomicos;
 
 	}
 

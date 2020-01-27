@@ -13,12 +13,13 @@ public class Carro {
 	private String placa;
 	private CategoriaCarro categoria;
 	private TabelaPreco tbPreco;
+	private Double valor;
 	
 	
 	public Carro() {
 	}
 	public Carro(Integer codCarro, String fabricante, String modelo, String ano, String cor, String chassi,
-			String placa) {
+			String placa, Double valor) {
 
 		this.codCarro = codCarro;
 		this.fabricante = fabricante;
@@ -27,6 +28,7 @@ public class Carro {
 		this.cor = cor;
 		this.chassi = chassi;
 		this.placa = placa;
+		this.valor = valor;
 	}
 	//Getters and Setters
 	public String getFabricante() {
@@ -99,6 +101,13 @@ public class Carro {
 	}
 	public void setTbPreco(TabelaPreco tbPreco) {
 		this.tbPreco = tbPreco;
+	}
+	
+	public Double getValor() {
+		return valor;
+	}
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 	
 	public String toString() {
