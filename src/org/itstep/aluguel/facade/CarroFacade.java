@@ -50,7 +50,7 @@ public class CarroFacade {
 	}
 
 
-	public List<Carro> listaCarros() {
+	public List<Carro> findAllCarros() {
 		
 		List<Carro> listaCarros = new ArrayList<Carro>();
 
@@ -94,7 +94,39 @@ public class CarroFacade {
 			
 			//Buscando carros no banco e adicionando a lista
 			while (rs.next()) {
-				if(rs.getString("descricao_carro").equalsIgnoreCase("econômico")) {
+				if(rs.getString("descricao_carro").equalsIgnoreCase("economico")) {
+					listaCarrosEconomicos.add(new Carro(rs.getInt("COD_CARRO"), rs.getString("FABRICANTE"),rs.getString("MODELO"),
+					         rs.getString("ANO"),rs.getString("COR"), rs.getString("CHASSI"),rs.getString("PLACA"), rs.getDouble("VALOR")));
+				}
+							
+			
+			}
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.out.println("Erro:" + e.getMessage());
+		}
+		return listaCarrosEconomicos;
+
+	}
+	
+	public List<Carro> listaCarrosEsportivos() {
+		
+		List<Carro> listaCarrosEconomicos = new ArrayList<Carro>();
+
+		try {
+			
+			String sql = "SELECT COD_CARRO,cc.descricao_carro,ANO, CHASSI, COR, MODELO, FABRICANTE, PLACA, VALOR FROM T20WPS2.tb_carro C JOIN T20WPS2.TB_CATEGORIA_CARRO CC\r\n" + 
+					"ON c.cod_categoria_carro = cc.cod_categoria_carro";
+
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			
+			//Buscando carros no banco e adicionando a lista
+			while (rs.next()) {
+				if(rs.getString("descricao_carro").equalsIgnoreCase("esportivo")) {
 					listaCarrosEconomicos.add(new Carro(rs.getInt("COD_CARRO"), rs.getString("FABRICANTE"),rs.getString("MODELO"),
 					         rs.getString("ANO"),rs.getString("COR"), rs.getString("CHASSI"),rs.getString("PLACA"), rs.getDouble("VALOR")));
 				}

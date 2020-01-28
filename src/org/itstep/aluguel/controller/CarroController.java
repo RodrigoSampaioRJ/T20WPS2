@@ -37,7 +37,7 @@ public class CarroController {
 		
 		CarroFacade carroFacade = new CarroFacade();
 	
-		return carroFacade.listaCarros();
+		return carroFacade.findAllCarros();
 	}
 	
 	@GET
@@ -48,6 +48,16 @@ public class CarroController {
 		CarroFacade carroFacade = new CarroFacade();
 	
 		return carroFacade.listaCarrosEconomicos();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/lista_carros_esportivos")
+	public List<Carro> listaCarrosEsportivos(@Context HttpHeaders httpHeaders) {
+		
+		CarroFacade carroFacade = new CarroFacade();
+	
+		return carroFacade.listaCarrosEsportivos();
 	}
 	
 	

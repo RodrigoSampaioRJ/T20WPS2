@@ -1,5 +1,7 @@
 $(document).ready(function() {
-	console.log($('#idTipoCarro'))
+	
+
+
 	
 });
 
@@ -28,4 +30,34 @@ $.ajax({
 
 	}
 });
+
+
+function selecionaCarro(idCarro){
+	var urlValor = "http://localhost:9080/AluguelCarros/aluguelRest/aluguel_carro_economico/" + idCarro; 
+
+	
+    $.ajax({
+        type : "GET",
+        url : urlValor,
+		data : "",
+		async : false,
+		cache : false,
+		dataType : 'json',
+		success : function(resultValor) {
+			        	 
+            $("#idValorCarro").val(resultValor.valor);
+			
+        }
+    });
+    
+    
+    
+    
+}
+
+function buscaValor(){
+	
+	selecionaCarro($("#idTipoCarro").val());
+	
+}
 
