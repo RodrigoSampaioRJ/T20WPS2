@@ -63,7 +63,7 @@ public class CarroController {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/busca={categoria}")
+	@Path("b{categoria}")
 	public List<Carro> buscaPorCategoria(@Context HttpHeaders httpHeaders, @PathParam ("categoria") String categoria) {
 		
 		CarroFacade carroFacade = new CarroFacade();

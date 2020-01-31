@@ -134,7 +134,7 @@
 						role="search">
 						<div class="form-group">
 							<input type="text" class="form-control searchform"
-								placeholder="Palavra Chave">
+								placeholder="Palavra Chave" id="pChave">
 						</div>
 					</form>
 					<ul class="nav navbar-nav navbarborder">
@@ -143,9 +143,9 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Categoria<span
 								class="glyphicon glyphicon-chevron-down downicon"></span></a>
 							<ul class="dropdown-menu" id="mydd">
-								<li><a href="#" value="economico">Econômicos</a></li>
-								<li><a href="#" value="esportivo">Esportivos</a></li>
-								<li><a href="#" value="utilitario">Utilitários</a></li>
+								<li value="economico"><a href="#" >Econômicos</a></li>
+								<li value="esportivo"><a href="#" >Esportivos</a></li>
+								<li value="utilitario"><a href="#" >Utilitários</a></li>
 							</ul></li>
 						<li class="li-minyear"><a
 							class="btn  dropdown-toggle btn-costume" id="dropdownMenu2"
@@ -188,7 +188,7 @@
 
 	<form action="">
 	
-		<ol name="listaCarros" id="idListaCarros"></ol>
+<table id="idTbCarro" class="table table-sm table-bordered table-condensed table-hover" style= "width=20%; padding= 30px"></table>
 		
 		<select name="tipoCarro" id="idTipoCarro" class="w-25 p-3" style ="margin: 10px" ></select>
 		<input type="button" name="botaoOk" id="idBotao" value="OK" onclick="buscaValor();" style ="margin: 10px" >
