@@ -21,7 +21,7 @@
   </head>
   <body>
   <h2>
-	<span class="label label-default">Hello World</span>  
+	<span class="w-25 p-3"  style= "background-color: #eee;">Hello World</span>  
   </h2>
     
 

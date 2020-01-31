@@ -143,9 +143,9 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Categoria<span
 								class="glyphicon glyphicon-chevron-down downicon"></span></a>
 							<ul class="dropdown-menu" id="mydd">
-								<li><a href="#">Epic</a></li>
-								<li><a href="#">Velhos</a></li>
-								<li><a href="#">Modernos</a></li>
+								<li><a href="#" value="economico">Econômicos</a></li>
+								<li><a href="#" value="esportivo">Esportivos</a></li>
+								<li><a href="#" value="utilitario">Utilitários</a></li>
 							</ul></li>
 						<li class="li-minyear"><a
 							class="btn  dropdown-toggle btn-costume" id="dropdownMenu2"
@@ -176,9 +176,8 @@
 
 						</li>
 						<li class="li-search">
-							<button class="searchbutton">
+							<input type="button" class="searchbutton" onclick="buscaPorCategoria();">
 								<span class="glyphicon glyphicon-search "></span>
-							</button>
 						</li>
 					</ul>
 
@@ -188,10 +187,12 @@
 	</div>
 
 	<form action="">
+	
+		<ol name="listaCarros" id="idListaCarros"></ol>
 		
-		<select name="tipoCarro" id="idTipoCarro" class="form-control"></select>
-		<input type="button" name="botaoOk" id="idBotao" value="OK" onclick="buscaValor();">
-	    <input type="text"  id="idValorCarro" class="form-control" >
+		<select name="tipoCarro" id="idTipoCarro" class="w-25 p-3" style ="margin: 10px" ></select>
+		<input type="button" name="botaoOk" id="idBotao" value="OK" onclick="buscaValor();" style ="margin: 10px" >
+	    <input type="text"  id="idValorCarro" class="w-25 p-3" style ="margin: 10px" >
 	    
 	</form>
 	

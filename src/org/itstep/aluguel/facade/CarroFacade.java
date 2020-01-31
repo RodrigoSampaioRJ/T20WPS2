@@ -12,7 +12,8 @@ import org.itstep.aluguel.model.Carro;
 public class CarroFacade {
 	
 	JdbcDAOFactory jdbc = new JdbcDAOFactory();
-
+	
+	//Busca carro por ID
 	public Carro buscaCarro(Integer codCarro) {
 	
 		Carro carro = new Carro();
@@ -49,7 +50,7 @@ public class CarroFacade {
 		return carro;
 	}
 
-
+	//Listar todos os carros
 	public List<Carro> findAllCarros() {
 		
 		List<Carro> listaCarros = new ArrayList<Carro>();
@@ -79,6 +80,7 @@ public class CarroFacade {
 
 	}
 	
+	//Listar Carros Economicos
 	public List<Carro> listaCarrosEconomicos() {
 		
 		List<Carro> listaCarrosEconomicos = new ArrayList<Carro>();
@@ -111,6 +113,7 @@ public class CarroFacade {
 
 	}
 	
+	//Listar Carros Esportivos
 	public List<Carro> listaCarrosEsportivos() {
 		
 		List<Carro> listaCarrosEconomicos = new ArrayList<Carro>();
@@ -140,6 +143,39 @@ public class CarroFacade {
 			System.out.println("Erro:" + e.getMessage());
 		}
 		return listaCarrosEconomicos;
+
+	}
+	
+	//Lista de Carro por categoria
+	public List<Carro> buscaPorCategoria(String categoria) {
+		
+		List<Carro> listaCarros = new ArrayList<Carro>();
+
+		try {
+			
+			String sql = "SELECT COD_CARRO,cc.descricao_carro,ANO, CHASSI, COR, MODELO, FABRICANTE, PLACA, VALOR FROM T20WPS2.tb_carro C JOIN T20WPS2.TB_CATEGORIA_CARRO CC\r\n" + 
+					"ON c.cod_categoria_carro = cc.cod_categoria_carro";
+
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			
+			//Buscando carros no banco e adicionando a lista
+			while (rs.next()) {
+				if(rs.getString("descricao_carro").equalsIgnoreCase(categoria)) {
+					listaCarros.add(new Carro(rs.getInt("COD_CARRO"), rs.getString("FABRICANTE"),rs.getString("MODELO"),
+					         rs.getString("ANO"),rs.getString("COR"), rs.getString("CHASSI"),rs.getString("PLACA"), rs.getDouble("VALOR")));
+				}
+							
+			
+			}
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.out.println("Erro:" + e.getMessage());
+		}
+		return listaCarros;
 
 	}
 

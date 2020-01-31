@@ -1,5 +1,6 @@
 package org.itstep.aluguel.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -58,6 +59,17 @@ public class CarroController {
 		CarroFacade carroFacade = new CarroFacade();
 	
 		return carroFacade.listaCarrosEsportivos();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/busca={categoria}")
+	public List<Carro> buscaPorCategoria(@Context HttpHeaders httpHeaders, @PathParam ("categoria") String categoria) {
+		
+		CarroFacade carroFacade = new CarroFacade();
+		
+		return carroFacade.buscaPorCategoria(categoria);
+		
 	}
 	
 	
