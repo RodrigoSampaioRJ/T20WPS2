@@ -188,11 +188,12 @@
 
 	<form action="">
 	
-<table id="idTbCarro" class="table table-sm table-bordered table-condensed table-hover" style= "width=20%; padding= 30px"></table>
+		<table id="idTbCarro" class="table table-sm table-bordered table-condensed table-hover"></table>
 		
-		<select name="tipoCarro" id="idTipoCarro" class="w-25 p-3" style ="margin: 10px" ></select>
-		<input type="button" name="botaoOk" id="idBotao" value="OK" onclick="buscaValor();" style ="margin: 10px" >
+		<select name="tipoCarro" id="idTipoCarro" class="w-25 p-3" style ="margin: 10px" onchange="buscaValor();"></select>
+		<span name="textoValor"> Valor da diária = </span>
 	    <input type="text"  id="idValorCarro" class="w-25 p-3" style ="margin: 10px" >
+	    <a href="cadastro_de_cliente.jsp" target="_self"><input type="button" id="idButtonOk" value="OK" onclick=></a>
 	    
 	</form>
 	

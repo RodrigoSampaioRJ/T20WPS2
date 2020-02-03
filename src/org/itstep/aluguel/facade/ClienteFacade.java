@@ -2,6 +2,7 @@ package org.itstep.aluguel.facade;
 
 import java.util.Date;
 
+import org.itstep.aluguel.dao.JdbcDAOFactory;
 import org.itstep.aluguel.model.Cliente;
 import org.itstep.aluguel.model.DocumentoPessoaFisica;
 import org.itstep.aluguel.model.Endereco;
@@ -9,6 +10,8 @@ import org.itstep.aluguel.model.PessoaFisica;
 import org.itstep.aluguel.model.Telefone;
 
 public class ClienteFacade {
+	
+	JdbcDAOFactory jdbc = new JdbcDAOFactory();
 	
 	public Cliente buscaCliente(Integer codigo) {
 		
@@ -73,6 +76,10 @@ public class ClienteFacade {
 			
 		}
 		return cliente;
+		
+	}
+	
+	public void addCliente(Cliente cliente) {
 		
 	}
 
