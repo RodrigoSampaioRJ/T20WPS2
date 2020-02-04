@@ -21,8 +21,8 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="idNome">Nome</label>  
-  <div class="col-md-4">
+  <label class="col-md-5 control-label" for="idNome">Nome</label>  
+  <div class="col-md-2">
   <input id="idNome" name="idNome" type="text" placeholder="Nome" class="form-control input-md" required="">
     
   </div>
@@ -30,8 +30,8 @@
 
 <!-- Password input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="idSenha">Senha</label>
-  <div class="col-md-4">
+  <label class="col-md-5 control-label" for="idSenha">Senha</label>
+  <div class="col-md-2">
     <input id="idSenha" name="idSenha" type="password" placeholder="Senha" class="form-control input-md" required="">
     
   </div>
@@ -39,19 +39,22 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>  
+  <label class="col-md-5 control-label" for="Nome">CPF <h11>*</h11></label>  
   <div class="col-md-2">
   <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
   </div>
   
-  <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>  
+  <div class="form-group">
+  <label class="col-md-6 control-label "  for="Nome">Nascimento<h11>*</h11></label>  
   <div class="col-md-2">
   <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
+  </div>
+  
 </div>
 
 <!-- Multiple Radios (inline) -->
 
-  <label class="col-md-1 control-label" for="radios">Sexo <h11>*</h11></label>
+  <label class="col-md-4 control-label" for="radios">Sexo <h11>*</h11></label>
   <div class="col-md-4"> 
     <label required="" class="radio-inline" for="radios-0" >
       <input name="sexo" id="sexo" value="feminino" type="radio" required>
@@ -66,7 +69,7 @@
 
 <!-- Prepended text-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="prependedtext">Telefone <h11>*</h11></label>
+  <label class="col-md-4 control-label" for="prependedtext">Telefone <h11>*</h11></label>
   <div class="col-md-2">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
@@ -75,7 +78,7 @@
     </div>
   </div>
   
-    <label class="col-md-1 control-label" for="prependedtext">Telefone</label>
+    <label class="col-md-4 control-label" for="prependedtext">Telefone</label>
      <div class="col-md-2">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
@@ -87,8 +90,8 @@
 
 <!-- Prepended text-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="prependedtext">Email <h11>*</h11></label>
-  <div class="col-md-5">
+  <label class="col-md-4 control-label" for="prependedtext">Email <h11>*</h11></label>
+  <div class="col-md-3">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
       <input id="prependedtext" name="prependedtext" class="form-control" placeholder="email@email.com" required="" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
@@ -97,11 +100,11 @@
   
   <!-- Search input-->
 <div class="form-group">
-  <label class="col-md-2 control-label" for="CEP">CEP <h11>*</h11></label>
+  <label class="col-md-4 control-label" for="CEP">CEP <h11>*</h11></label>
   <div class="col-md-2">
     <input id="cep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search" maxlength="8" pattern="[0-9]+$">
   </div>
-  <div class="col-md-2">
+  <div class="col-md-4">
       <button type="button" class="btn btn-primary" onclick="pesquisacep(cep.value)">Pesquisar</button>
     </div>
 </div>
