@@ -1,3 +1,5 @@
+var baseURL = "http://localhost:9080/AluguelCarros/aluguelRest/cliente/"
+
 function formatar(mascara, documento){
   var i = documento.value.length;
   var saida = mascara.substring(0,1);
@@ -8,6 +10,25 @@ function formatar(mascara, documento){
   }
   
 }
+
+function cadastro() {
+
+     $.ajax({
+        type : "POST",
+        url : baseURL+"/cadastro",
+		data : "",
+		async : false,
+		cache : false,
+		dataType : 'json',
+		success :$("#idValorCarro").val(resultValor.valor)
+			        	 
+            
+			
+        
+    });
+}
+
+
 
 function pesquisacep(valor) {
 
@@ -24,16 +45,16 @@ function pesquisacep(valor) {
             if(validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value="...";
-                document.getElementById('bairro').value="...";
-                document.getElementById('cidade').value="...";
-                document.getElementById('estado').value="...";
+                document.getElementById("rua").value="...";
+                document.getElementById("bairro").value="...";
+                document.getElementById("cidade").value="...";
+                document.getElementById("estado").value="...";
 
                 //Cria um elemento javascript.
-                var script = document.createElement('script');
+                var script = document.createElement("script");
 
                 //Sincroniza com o callback.
-                script.src = '//viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+                script.src = "/viacep.com.br/ws/"+ cep + "/json" + "?callback=callback_name";
 
                 //Insere script no documento e carrega o conteúdo.
                 document.body.appendChild(script);

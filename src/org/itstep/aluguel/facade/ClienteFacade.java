@@ -2,6 +2,7 @@ package org.itstep.aluguel.facade;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.itstep.aluguel.dao.JdbcDAOFactory;
@@ -28,13 +29,22 @@ public class ClienteFacade {
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getInt("COD_CLIENTE")==codigo) {
+					c.setDtCadastro(new Date());
+				}
+			}
 
+	    }catch(SQLException e) {
+	    	
 	    }
 		return c;
 	}
 
-	public void addCliente(Cliente cliente) {
-
+	public void addCliente() {
+		
+		PessoaFisica pf = new PessoaFisica();
 	}
 
 }

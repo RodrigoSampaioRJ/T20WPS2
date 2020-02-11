@@ -115,8 +115,8 @@
     <input id="cep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search" maxlength="8" pattern="[0-9]+$">
   </div>
   <div class="col-md-4">
-      <button type="button" class="btn btn-primary" onclick="pesquisacep(cep.value)">Pesquisar</button>
-    </div>
+      <button type="button" class="btn btn-primary" onclick="pesquisacep($(#cep).val());">Pesquisar</button>
+   </div>
 </div>
 
 <!-- Prepended text-->
@@ -164,6 +164,18 @@
       </div>
    </div>
 </div>
+
+<div class="row">
+	<div class="col-md-6 control-label">
+		<button type="button" class="btn btn-primary" onclick="cadastro()">Cadastrar</button>
+	</div>
+	
+	<div class="col-md-1 control-label">
+		<button type="button" class="btn btn-primary" onclick="">Limpar</button>
+	</div>
+</div>
+	
+
 
 
 </fieldset>
