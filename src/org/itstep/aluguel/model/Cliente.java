@@ -11,14 +11,24 @@ public class Cliente  {
 	
 	
 
+
+	public Cliente() {
+	}
+	public Cliente(PessoaFisica pessoaFisica) {
+		this.pessoaFisica = pessoaFisica;
+		this.pessoaJuridica = null;
+		this.dtCadastro = new Date();
+	}
+	
+	//Getters and Setters
 	public PessoaFisica getPessoaFisica() {
 		return pessoaFisica;
 	}
 	public void setPessoaFisica(PessoaFisica pessoaFisica) {
 		this.pessoaFisica = pessoaFisica;
 	}
-
-	//Getters and Setters
+	
+	
 	public PessoaJuridica getPessoaJuridica() {
 		return pessoaJuridica;
 	}

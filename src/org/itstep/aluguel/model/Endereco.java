@@ -8,9 +8,23 @@ public class Endereco {
 	private String complemento;
 	private String bairro;
 	private String cidade;
-	private String estado;
+	private String uf;
 	private String cep;
 	
+	
+	
+	public Endereco() {
+	}
+	public Endereco(String logradouro, String numero, String complemento, String bairro, String cidade, String uf,
+			String cep) {
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.uf = uf;
+		this.cep = cep;
+	}
 	//Getters and Setters
 	public String getLogradouro() {
 		return logradouro;
@@ -53,10 +67,10 @@ public class Endereco {
 	
 	
 	public String getEstado() {
-		return estado;
+		return uf;
 	}
 	public void setEstado(String estado) {
-		this.estado = estado;
+		this.uf = estado;
 	}
 	
 	

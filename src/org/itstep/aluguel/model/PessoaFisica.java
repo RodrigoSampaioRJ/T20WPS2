@@ -9,6 +9,19 @@ public class PessoaFisica extends Pessoa {
 	private String   				sexo;
 	private DocumentoPessoaFisica   documentoPessoaFisica;
 	
+	
+	public PessoaFisica() {
+	}
+	
+	
+	public PessoaFisica(Integer codPessoa,String nome, String email, Endereco endereco, Telefone telefone, String senha, Date dtNascimento, String sexo, DocumentoPessoaFisica documentoPessoaFisica) {
+		super(codPessoa,nome, email, endereco, telefone, senha);
+		this.dtNascimento = dtNascimento;
+		this.sexo = sexo;
+		this.documentoPessoaFisica = documentoPessoaFisica;
+	}
+	
+	
 	//Getters and Setters
 	public Date getDtNascimento() {
 		return dtNascimento;

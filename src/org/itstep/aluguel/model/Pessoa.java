@@ -12,6 +12,18 @@ public abstract class Pessoa {
 	private Telefone telefone;
 	private String   senha;
 	
+	
+	public Pessoa() {
+	}
+	
+	public Pessoa(Integer codPessoa, String nome, String email, Endereco endereco, Telefone telefone, String senha) {
+		this.codPessoa = codPessoa;
+		this.nome = nome;
+		this.email = email;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.senha = senha;
+	}
 	//Getters and Setters
 	public Integer getCodPessoa() {
 		return codPessoa;

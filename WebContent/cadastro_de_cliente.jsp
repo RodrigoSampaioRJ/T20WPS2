@@ -31,7 +31,7 @@
 
 <!-- Text input-->
 <div class="form-group row">
-  <label class="col-md-5 control-label" for="idNome">Nome</label>  
+  <label class="col-md-5 control-label" for="idNome">Nome<h11>*</h11></label>  
   <div class="col-md-2">
   <input id="idNome" name="idNome" type="text" placeholder="Nome" class="form-control input-md" required="">
     
@@ -42,7 +42,7 @@
 
 <!-- Password input-->
 <div class="form-group row">
-  <label class="col-md-5 control-label" for="idSenha">Senha</label>
+  <label class="col-md-5 control-label" for="idSenha">Senha<h11>*</h11></label>
   <div class="col-md-2">
     <input id="idSenha" name="idSenha" type="password" placeholder="Senha" class="form-control input-md" required=""> 
   </div>
@@ -52,14 +52,42 @@
 <div class="form-group row">
   <label class="col-md-5 control-label" for="Nome">CPF <h11>*</h11></label>  
   <div class="col-md-2">
-  <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+  <input id="idCpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label class="col-md-5 control-label" for="Nome">RG <h11>*</h11></label>  
+  <div class="col-md-2">
+  <input id="idRg" name="rg" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="9" pattern="[0-9]+$">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label class="col-md-5 control-label" for="Nome">Orgão Emissor <h11>*</h11></label>  
+  <div class="col-md-2">
+  <input id="idOrgao" name="orgao" placeholder="Emissor" class="form-control input-md" required="" type="text">
+  </div>
+</div>
+
+<div class="form-group row"> 
+  <label class="col-md-5 control-label "  for="Nome">Data de Emissão<h11>*</h11></label>  
+  <div class="col-md-2">
+  <input id="idDtEmissao" name="dtemissao" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">  
+  </div>
+</div>
+
+<div class="form-group row">
+  <label class="col-md-5 control-label" for="Nome">Habilitação <h11>*</h11></label>  
+  <div class="col-md-2">
+  <input id="idHabilitacao" name="habilitacao" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
   </div>
 </div>
 
 <div class="form-group row"> 
   <label class="col-md-5 control-label "  for="Nome">Nascimento<h11>*</h11></label>  
   <div class="col-md-2">
-  <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">  
+  <input id="idDtNasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">  
   </div>
 </div>
 
@@ -68,11 +96,11 @@
   <label class="col-md-5 control-label" for="radios">Sexo <h11>*</h11></label>
   
     <label required="" class="radio-inline" for="radios-0" >
-      <input name="sexo" id="sexo" value="feminino" type="radio" required>
+      <input name="sexo" id="idSexo" value="feminino" type="radio" required>
       Feminino
     </label> 
     <label class="radio-inline" for="radios-1">
-      <input name="sexo" id="sexo" value="masculino" type="radio">
+      <input name="sexo" id="idSexo" value="masculino" type="radio">
       Masculino
     </label>
   
@@ -83,14 +111,14 @@
   <label class="col-md-5 control-label" for="prependedtext">Telefone <h11>*</h11></label>
     <div class=" col-md-2 input-group"  style="margin-bottom:10px">
       <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+      <input id="idTelefone1" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
       OnKeyPress="formatar('## #####-####', this)">
     </div>
   
   <label class="col-md-5 control-label" for="prependedtext">Telefone</label>
     <div class=" col-md-2 input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" type="text" maxlength="13"  pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
+      <input id="idTelefone2" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" type="text" maxlength="13"  pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
       OnKeyPress="formatar('## #####-####', this)">
   </div>
  
@@ -104,7 +132,7 @@
   <div class="col-md-2">
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="email@email.com" required="" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+      <input id="idEmail" name="prependedtext" class="form-control" placeholder="email@email.com" required="" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
     </div>
   </div>
 </div>  
@@ -112,7 +140,7 @@
 <div class="form-group row">
   <label class="col-md-5 control-label" for="CEP">CEP <h11>*</h11></label>
   <div class="col-md-2" style="margin-right:10px">
-    <input id="cep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search" maxlength="8" pattern="[0-9]+$">
+    <input id="idCep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search" maxlength="8" pattern="[0-9]+$">
   </div>
   <div class="col-md-4">
       <button type="button" class="btn btn-primary" onclick="pesquisacep($(#cep).val());">Pesquisar</button>
@@ -124,7 +152,7 @@
   <label class="col-md-5 control-label" for="prependedtext">Endereço</label> 
     <div class="col-md-2 input-group">
       <span class="input-group-addon">Rua</span>
-      <input id="rua" name="rua" class="form-control" placeholder="" required="" readonly="readonly" type="text">
+      <input id="idRua" name="rua" class="form-control" placeholder="" required="" readonly="readonly" type="text">
     </div> 
 </div>
 
@@ -132,15 +160,24 @@
 	<label class="col-md-5 control-label" for="prependedtext"></label>
     <div class="col-md-2 input-group">
       	<span class="input-group-addon">Nº <h11>*</h11></span>
-      	<input id="numero" name="numero" class="form-control" placeholder="" required=""  type="text">
+      	<input id="idNumero" name="numero" class="form-control" placeholder="Número" required=""  type="text">
     </div>
 </div>
+
+<div class="form-group row">
+	<label class="col-md-5 control-label" for="prependedtext"></label>
+    <div class="col-md-2 input-group">
+      	<span class="input-group-addon">Complemento <h11>*</h11></span>
+      	<input id="idComplemento" name="complemento" class="form-control" placeholder="Complemento" required=""  type="text">
+    </div>
+</div>
+
 
 <div class="form-group row"> 
 	<label class="col-md-5 control-label" for="prependedtext"></label>
     <div class="col-md-2 input-group">
       <span class="input-group-addon">Bairro</span>
-      <input id="bairro" name="bairro" class="form-control" placeholder="" required="" readonly="readonly" type="text">
+      <input id="idBairro" name="bairro" class="form-control" placeholder="" required="" readonly="readonly" type="text">
     </div> 
 </div>
 
@@ -150,7 +187,7 @@
   <div class="col-md-2">
     <div class="input-group">
       <span class="input-group-addon">Cidade</span>
-      <input id="cidade" name="cidade" class="form-control" placeholder="" required=""  readonly="readonly" type="text">
+      <input id="idCidade" name="cidade" class="form-control" placeholder="" required=""  readonly="readonly" type="text">
     </div>
   </div>   
 </div>
@@ -160,7 +197,7 @@
    <div class="col-md-2">
       <div class="input-group">
       	<span class="input-group-addon">Estado</span>
-      	<input id="estado" name="estado" class="form-control" placeholder="" required=""  readonly="readonly" type="text">
+      	<input id="idUf" name="estado" class="form-control" placeholder="" required=""  readonly="readonly" type="text">
       </div>
    </div>
 </div>
@@ -171,7 +208,7 @@
 	</div>
 	
 	<div class="col-md-1 control-label">
-		<button type="button" class="btn btn-primary" onclick="">Limpar</button>
+		<button type="button" class="btn btn-primary" onclick="dadosForm();">Limpar</button>
 	</div>
 </div>
 	
@@ -191,3 +228,70 @@
 </html>
 
 <script type="text/javascript" src="js/cadastro_de_cliente.js"></script>
+
+
+<script type="text/javascript">
+
+        $(document).ready(function() {
+
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#idRua").val("");
+                $("#idBairro").val("");
+                $("#idCidade").val("");
+                $("#idUf").val("");
+                
+            }
+            
+            //Quando o campo cep perde o foco.
+            $("#idCep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if(validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#idRua").val("...");
+                        $("#idBairro").val("...");
+                        $("#idCidade").val("...");
+                        $("#idUf").val("...");            
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#idRua").val(dados.logradouro);
+                                $("#idBairro").val(dados.bairro);
+                                $("#idCidade").val(dados.localidade);
+                                $("#idUf").val(dados.uf);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado !");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido !");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+
+</script>

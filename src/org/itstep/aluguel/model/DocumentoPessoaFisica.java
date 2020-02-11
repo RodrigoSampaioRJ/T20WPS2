@@ -5,17 +5,30 @@ import java.util.Date;
 public class DocumentoPessoaFisica {
 	
 	//Atributos da Classe
-	private String cpf;
+	private Integer cpf;
 	private String rg;
 	private Date   dtEmissaoRG;
 	private String orgaoEmissor;
 	private String habilitacao;
 	
+	
+	
+	public DocumentoPessoaFisica() {
+	}
+	
+	public DocumentoPessoaFisica(Integer cpf, String rg, Date dtEmissaoRG, String orgaoEmissor, String habilitacao) {
+		this.cpf = cpf;
+		this.rg = rg;
+		this.dtEmissaoRG = dtEmissaoRG;
+		this.orgaoEmissor = orgaoEmissor;
+		this.habilitacao = habilitacao;
+	}
+	
 	//Getters and Setters
-	public String getCpf() {
+	public Integer getCpf() {
 		return cpf;
 	}
-	public void setCpf(String cpf) {
+	public void setCpf(Integer cpf) {
 		this.cpf = cpf;
 	}
 	
