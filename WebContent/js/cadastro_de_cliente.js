@@ -1,36 +1,33 @@
 var baseURL = "http://localhost:9080/AluguelCarros/aluguelRest/cliente/"
 
-function dadosForm(){
 
-var nome= $('#idNome').val();
-var senha= $('#idSenha').val();
-var cpf= $('#idCpf').val();
-var dtNascimento= $('#idNascimento').val();
-var  sexo= $('#idSexo').val();
-var telefone= $("#idTelefone1").val();
-var telefone2= $("#idTelefone2").val();
-var email= $("#idEmail").val();
-var cep= $("#idCep").val();
-var logradouro= $("#idRua").val();
-var numero= $("#idNumero").val();
-var bairro= $("#idBairro").val();
-var complemento= $("#idComplemento").val();
-var cidade= $("#idCidade").val();
-var uf= $("#idUf").val();
-var habilitacao= $("#idHabilitacao").val();
-var rg= $("#idRg").val();
-var orgaoEmissor= $("#idOrgao").val();
-var dtEmissao= $("#idDtEmissao").val();
+// var nome= $('#idNome').val();
+// var senha= $('#idSenha').val();
+// var cpf= $('#idCpf').val();
+// var dtNascimento= $('#idNascimento').val();
+// var  sexo= $('#idSexo').val();
+// var telefone= $("#idTelefone1").val();
+// var telefone2= $("#idTelefone2").val();
+// var email= $("#idEmail").val();
+// var cep= $("#idCep").val();
+// var logradouro= $("#idRua").val();
+// var numero= $("#idNumero").val();
+// var bairro= $("#idBairro").val();
+// var complemento= $("#idComplemento").val();
+// var cidade= $("#idCidade").val();
+// var uf= $("#idUf").val();
+// var habilitacao= $("#idHabilitacao").val();
+// var rg= $("#idRg").val();
+// var orgaoEmissor= $("#idOrgao").val();
+// var dtEmissao= $("#idDtEmissao").val();
 
 
- alert(nome + " " + senha);
-}
+function cadastro()  {
 
-function cadastro() {
-
+    
      $.ajax({
         type : "POST",
-        url : baseURL+"/cadastro",
+        url : baseURL+"cadastro",
 		data : nome+","+senha+","+cpf+","+rg+","+habilitacao+","+orgaoEmissor+","+dtEmissao+","+dtNascimento+","+sexo+","+telefone+","+telefone2+","+email+","+
         cep+","+logradouro+","+numero+","+bairro+","+complemento+","+cidade+","+uf,
 		async : false,
@@ -41,6 +38,43 @@ function cadastro() {
 
     });
 }
+
+
+function teste(){
+
+    var json = {
+            nome: "Rodrigo",
+            email: "digo.15rj@gmail.com",
+            dtNascimento: "26/02/1997",
+            sexo: "masculino"
+        ,
+    DocumentoPessoaFisica:
+        {
+            cpf: 18388778781,
+            rg: "301941399",
+            dtEmissao: "26/02/1997",
+            orgaoEmissor: "Detran",
+            habilitacao: 12345678912
+        }
+    } 
+    
+    
+
+
+         $.ajax({
+        type : "POST",
+        url : "http://localhost:9080/AluguelCarros/aluguelRest/cliente/save",
+		data : JSON.stringify(json),
+		async : false,
+        cache : false,
+        contentType: "text/plain",
+		dataType : 'text',
+        success: 
+        alert("Enviado")
+
+    });
+}
+
 
 function formatar(mascara, documento){
 

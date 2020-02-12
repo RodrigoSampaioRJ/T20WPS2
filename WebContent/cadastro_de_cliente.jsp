@@ -31,7 +31,7 @@
 
 <!-- Text input-->
 <div class="form-group row">
-  <label class="col-md-5 control-label" for="idNome">Nome<h11>*</h11></label>  
+  <label class="col-md-5 control-label" for="Nome">Nome<h11>*</h11></label>  
   <div class="col-md-2">
   <input id="idNome" name="idNome" type="text" placeholder="Nome" class="form-control input-md" required="">
     
@@ -143,7 +143,7 @@
     <input id="idCep" name="cep" placeholder="Apenas números" class="form-control input-md" required="" value="" type="search" maxlength="8" pattern="[0-9]+$">
   </div>
   <div class="col-md-4">
-      <button type="button" class="btn btn-primary" onclick="pesquisacep($(#cep).val());">Pesquisar</button>
+      <button type="button" class="btn btn-primary" onclick="pesquisacep();">Pesquisar</button>
    </div>
 </div>
 
@@ -204,7 +204,7 @@
 
 <div class="row">
 	<div class="col-md-6 control-label">
-		<button type="button" class="btn btn-primary" onclick="cadastro()">Cadastrar</button>
+		<button type="button" class="btn btn-primary" onclick="teste();">Cadastrar</button>
 	</div>
 	
 	<div class="col-md-1 control-label">
@@ -232,16 +232,16 @@
 
 <script type="text/javascript">
 
-        $(document).ready(function() {
-
-            function limpa_formulário_cep() {
-                // Limpa valores do formulário de cep.
-                $("#idRua").val("");
-                $("#idBairro").val("");
-                $("#idCidade").val("");
-                $("#idUf").val("");
+$(document).ready(function() {
+      
+	function limpa_formulário_cep() {
+             // Limpa valores do formulário de cep.
+	         $("#idRua").val("");
+	         $("#idBairro").val("");
+	         $("#idCidade").val("");
+	         $("#idUf").val("");
                 
-            }
+}
             
             //Quando o campo cep perde o foco.
             $("#idCep").blur(function() {

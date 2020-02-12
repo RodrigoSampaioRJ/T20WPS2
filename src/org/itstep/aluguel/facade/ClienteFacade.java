@@ -71,6 +71,7 @@ public class ClienteFacade {
 		
 		int cod_doc_pf_gerado = 0;
 		int cod_pf_gerado = 0;
+		int cod_pessoa_gerado = 0;
 		String sqlInsertDoc = "INSERT INTO T20WPS2.tb_documento_pf (cod_documento_pf, cpf, rg, data_emissao_rg, orgao_emissor_rg, habilitacao) "
 				+ "VALUES (T20WPS2.sq_doc_pf.nextval, ?, ?, ?, ?, ?)";
 //		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_cliente, cod_pf, cod_pj, data_cadastro) VALUES (T20WPS2.sq_cliente.nextval, 0 , 0, '20-DEC-2019')";
@@ -79,6 +80,9 @@ public class ClienteFacade {
 		
 		String sqlInsertPessoa = "INSERT INTO T20WPS2.tb_pessoa (cod_pessoa, nome_pessoa, email_pessoa, senha_pessoa)\r\n" + 
 				"VALUES (T20WPS2.sq_pessoa_1.nextval,?,?,?)";
+		
+		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_cliente, cod_pf, cod_pj, data_cadastro)"+
+				"VALUES (T20WPS2.sq_cliente.nextval,?,?,?)";
 		try {
 			
 		PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertDoc); 
@@ -123,6 +127,38 @@ public class ClienteFacade {
 		//INSERÇAO DA PESSOA CONTINUAR
 		try {
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoa);
+			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pessoa.currval from dual");
+			ps.setString(1, pf.getNome());
+			ps.setString(2, pf.getEmail());
+			ps.setString(3, pf.getSenha());
+			
+			if(ps.execute()) {		
+				ResultSet rs = psCod.executeQuery();
+				cod_pessoa_gerado = rs.getInt("CURRVAL");
+				rs.close();
+			}
+			ps.close();
+			psCod.close();
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		try {
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertCliente);
+			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_cliente.currval from dual");
+			ps.setInt(1, cod_pf_gerado);
+			ps.setString(2, null);
+			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
+			
+			if(ps.execute()) {		
+				ResultSet rs = psCod.executeQuery();
+				cod_pessoa_gerado = rs.getInt("CURRVAL");
+				rs.close();
+			}
+			ps.close();
+			psCod.close();
+			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
