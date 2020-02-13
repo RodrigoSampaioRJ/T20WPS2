@@ -5,32 +5,33 @@ import java.util.Date;
 public abstract class Pessoa {
 	
 	//Atributos da Classe
-	private Integer codPessoa;
+//	private Integer codPessoa;
 	private String   nome;
 	private String   email;
+	private String   senha;
 	private Endereco endereco;
 	private Telefone telefone;
-	private String   senha;
 	
 	
 	public Pessoa() {
 	}
 	
-	public Pessoa(Integer codPessoa, String nome, String email, Endereco endereco, Telefone telefone, String senha) {
-		this.codPessoa = codPessoa;
+	public Pessoa(String nome, String email,String senha, Endereco endereco, Telefone telefone) {
+//		this.codPessoa = codPessoa;
 		this.nome = nome;
 		this.email = email;
+		this.senha = senha;
 		this.endereco = endereco;
 		this.telefone = telefone;
-		this.senha = senha;
+		
 	}
 	//Getters and Setters
-	public Integer getCodPessoa() {
-		return codPessoa;
-	}
-	public void setCodPessoa(Integer codPessoa) {
-		this.codPessoa = codPessoa;
-	}
+//	public Integer getCodPessoa() {
+//		return codPessoa;
+//	}
+//	public void setCodPessoa(Integer codPessoa) {
+//		this.codPessoa = codPessoa;
+//	}
 	
 
 	public String getNome() {
@@ -74,7 +75,7 @@ public abstract class Pessoa {
 	
 	
 	public abstract Integer gerarCodigoUnico();
-	public abstract String converteData(Date data);
+	public abstract Date converteData(String data);
 	
 	
 	

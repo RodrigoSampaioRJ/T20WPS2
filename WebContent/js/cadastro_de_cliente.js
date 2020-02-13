@@ -42,20 +42,31 @@ function cadastro()  {
 
 function teste(){
 
-    var json = {
+    var json = {   
             nome: "Rodrigo",
             email: "digo.15rj@gmail.com",
+            senha: "1234",
+            endereco: {
+                logradouro: "Estrada dos Tres Rios",
+                numero: "670",
+                complemento: "202",
+                bairro: "Freguesia",
+                cidade: "Rio de Janeiro",
+                uf: "RJ",
+                cep: "22745005"
+            },
+             telefone: {
+                numero: "21982385725"
+            },
             dtNascimento: "26/02/1997",
-            sexo: "masculino"
-        ,
-    DocumentoPessoaFisica:
-        {
-            cpf: 18388778781,
-            rg: "301941399",
-            dtEmissao: "26/02/1997",
-            orgaoEmissor: "Detran",
-            habilitacao: 12345678912
-        }
+            sexo: "masculino",
+            documentoPessoaFisica: {
+                cpf: "18388778781",
+                rg: "301941399",
+                dtEmissao: "26/02/1997",
+                orgaoEmissor: "Detran",
+                habilitacao: "12345678912"
+            }        
     } 
     
     

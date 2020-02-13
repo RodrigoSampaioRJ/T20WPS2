@@ -30,8 +30,9 @@ public class PessoaJuridica extends Pessoa{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public String converteData(Date data) {
+	public Date converteData(String data) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,22 +3,22 @@ package org.itstep.aluguel.model;
 public class Telefone {
 	
 	//Atributos da Classe
-	private Integer numero;
+	private String numero;
 
 	public Telefone() {
 	}
 	
-	public Telefone(Integer numero) {
+	public Telefone(String numero) {
 		this.numero = numero;
 	}
 	
 	//Getters and Setters
 	
 	
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

@@ -55,13 +55,13 @@ public class ClienteFacade {
 							String logradouro, String numero, String bairro, String complemento, String cidade, String uf) throws ParseException {
 		
 		Integer codPessoa = null;
-		Telefone tel = new Telefone(telefone);
+//		Telefone tel = new Telefone(telefone);
 		Endereco end = new Endereco(logradouro, numero, complemento, bairro, cidade, uf, cep);
-		DocumentoPessoaFisica  dpf = new DocumentoPessoaFisica(cpf, rg, sdf.parse(dtEmissaoRG), orgaoEmissor, habilitacao);
+//		DocumentoPessoaFisica  dpf = new DocumentoPessoaFisica(cpf, rg, dtEmissaoRG, orgaoEmissor, habilitacao);
 
-		PessoaFisica pf = new PessoaFisica(codPessoa, nome, email, end, tel, senha, sdf.parse(dtNascimento), sexo, dpf);
+//		PessoaFisica pf = new PessoaFisica(codPessoa, nome, email, end, tel, senha, sdf.parse(dtNascimento), sexo, dpf);
 		
-		Cliente cliente = new Cliente(pf);
+//		Cliente cliente = new Cliente(pf);
 		
 		
 		
@@ -87,11 +87,11 @@ public class ClienteFacade {
 			
 		PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertDoc); 
 		PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_doc_pf.currval from dual");
-		ps.setInt(1, dpf.getCpf());
-		ps.setString(2, dpf.getRg());
-		ps.setDate(3, new java.sql.Date(dpf.getDtEmissaoRG().getTime()));
-		ps.setString(4, dpf.getOrgaoEmissor());
-		ps.setString(5, dpf.getHabilitacao());
+//		ps.setInt(1, dpf.getCpf());
+//		ps.setString(2, dpf.getRg());
+//		ps.setDate(3, new java.sql.Date(dpf.getDtEmissaoRG().getTime()));
+//		ps.setString(4, dpf.getOrgaoEmissor());
+//		ps.setString(5, dpf.getHabilitacao());
 		
 		if(ps.execute()) {		
 			ResultSet rs = psCod.executeQuery();
@@ -110,8 +110,8 @@ public class ClienteFacade {
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoaF);
 			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pf.currval from dual");
 			ps.setInt(1, cod_doc_pf_gerado);
-			ps.setDate(2, new java.sql.Date(pf.getDtNascimento().getTime()));
-			ps.setString(3, pf.getSexo());
+//			ps.setDate(2, new java.sql.Date(pf.getDtNascimento().getTime()));
+//			ps.setString(3, pf.getSexo());
 			
 			if(ps.execute()) {
 				ResultSet rs = psCod.executeQuery();
@@ -128,9 +128,9 @@ public class ClienteFacade {
 		try {
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoa);
 			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pessoa.currval from dual");
-			ps.setString(1, pf.getNome());
-			ps.setString(2, pf.getEmail());
-			ps.setString(3, pf.getSenha());
+//			ps.setString(1, pf.getNome());
+//			ps.setString(2, pf.getEmail());
+//			ps.setString(3, pf.getSenha());
 			
 			if(ps.execute()) {		
 				ResultSet rs = psCod.executeQuery();
@@ -149,7 +149,7 @@ public class ClienteFacade {
 			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_cliente.currval from dual");
 			ps.setInt(1, cod_pf_gerado);
 			ps.setString(2, null);
-			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
+//			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
 			
 			if(ps.execute()) {		
 				ResultSet rs = psCod.executeQuery();

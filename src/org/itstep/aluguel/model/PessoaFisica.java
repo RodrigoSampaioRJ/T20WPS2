@@ -1,11 +1,13 @@
 package org.itstep.aluguel.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PessoaFisica extends Pessoa {
-	
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	//Atributos da Classe
-	private Date 	 				dtNascimento;
+	private String 				    dtNascimento;
 	private String   				sexo;
 	private DocumentoPessoaFisica   documentoPessoaFisica;
 	
@@ -14,8 +16,8 @@ public class PessoaFisica extends Pessoa {
 	}
 	
 	
-	public PessoaFisica(Integer codPessoa,String nome, String email, Endereco endereco, Telefone telefone, String senha, Date dtNascimento, String sexo, DocumentoPessoaFisica documentoPessoaFisica) {
-		super(codPessoa,nome, email, endereco, telefone, senha);
+	public PessoaFisica(String nome, String email,String senha, Endereco endereco, Telefone telefone, String dtNascimento, String sexo, DocumentoPessoaFisica documentoPessoaFisica) {
+		super(nome, email,senha, endereco, telefone);
 		this.dtNascimento = dtNascimento;
 		this.sexo = sexo;
 		this.documentoPessoaFisica = documentoPessoaFisica;
@@ -23,14 +25,14 @@ public class PessoaFisica extends Pessoa {
 	
 	
 	//Getters and Setters
-	public Date getDtNascimento() {
+	public String getDtNascimento() {
 		return dtNascimento;
 	}
-	public void setDtNascimento(Date dtNascimento) {
+	public void setDtNascimento(String dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
-	
-	
+
+
 	public String getSexo() {
 		return sexo;
 	}
@@ -53,9 +55,17 @@ public class PessoaFisica extends Pessoa {
 		return null;
 	}
 	@Override
-	public String converteData(Date data) {
-		// TODO Auto-generated method stub
-		return null;
+	public Date converteData(String data) {
+		
+		Date date = null;
+		try {
+			date = sdf.parse(data);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return date;
 	}	
 	
 	
