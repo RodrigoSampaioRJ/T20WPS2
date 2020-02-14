@@ -65,8 +65,7 @@ public class ClienteFacade {
 		int cod_pessoa_gerado = 0;
 		String sqlInsertDoc = "INSERT INTO T20WPS2.tb_documento_pf (cod_documento_pf, cpf, rg, data_emissao_rg, orgao_emissor_rg, habilitacao) "
 				+ "VALUES (T20WPS2.sq_doc_pf.nextval, ?, ?, ?, ?, ?)";
-//		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_cliente, cod_pf, cod_pj, data_cadastro) VALUES (T20WPS2.sq_cliente.nextval, 0 , 0, '20-DEC-2019')";
-//		String sqlInsertTel = "INSERT INTO T20WPS2.TB_TELEFONE VALUES (T20WPS2.SQ_TELEFONE.NEXTVAL," + telefone;
+		String sqlInsertTel = "INSERT INTO T20WPS2.TB_TELEFONE (cod_telefone, numero) VALUES (T20WPS2.SQ_TELEFONE.NEXTVAL,?";
 		String sqlInsertPessoaF = "INSERT INTO T20WPS2.tb_pf (cod_pf, cod_documento_pf, data_nascimento, sexo) VALUES (t20wps2.sq_pf.nextval, ?,?,?)";
 		
 		String sqlInsertPessoa = "INSERT INTO T20WPS2.tb_pessoa (cod_pessoa, nome_pessoa, email_pessoa, senha_pessoa)\r\n" + 
@@ -74,15 +73,16 @@ public class ClienteFacade {
 		
 		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_cliente, cod_pf, cod_pj, data_cadastro)"+
 				"VALUES (T20WPS2.sq_cliente.nextval,?,?,?)";
+		
 		try {
 			
 		PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertDoc); 
 		PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_doc_pf.currval from dual");
-//		ps.setInt(1, dpf.getCpf());
-//		ps.setString(2, dpf.getRg());
-//		ps.setDate(3, new java.sql.Date(dpf.getDtEmissaoRG().getTime()));
-//		ps.setString(4, dpf.getOrgaoEmissor());
-//		ps.setString(5, dpf.getHabilitacao());
+		ps.setString(1,pf.getDocumentoPessoaFisica().getCpf());
+		ps.setString(2, pf.getDocumentoPessoaFisica().getRg());
+		ps.setDate(3, new java.sql.Date(pf.getDocumentoPessoaFisica().getDtEmissaoRG().getTime()));
+		ps.setString(4, pf.getDocumentoPessoaFisica().getOrgaoEmissor());
+		ps.setString(5, pf.getDocumentoPessoaFisica().getHabilitacao());
 		
 		if(ps.execute()) {		
 			ResultSet rs = psCod.executeQuery();

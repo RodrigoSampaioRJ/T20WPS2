@@ -1,5 +1,7 @@
 package org.itstep.aluguel.controller;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -63,6 +65,14 @@ public class ClienteController {
 		
 		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
 		
+		ClienteFacade clienteFacade = new ClienteFacade();
+		
+		try{
+			clienteFacade.addCliente(pf);
+			
+		}catch (ParseException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		String result = "Nome: " + pf.getNome() + "\n"+
 		"Email: " + pf.getEmail() +"\n" +
