@@ -50,25 +50,16 @@ public class ClienteFacade {
 //	nome+","+senha+","+cpf+","+dtNascimento+","+sexo+","+telefone+","+telefone2+","+email+","+
 //    cep+","+logradouro+","+numero+","+bairro+","+complemento+","+cidade+","+uf,
 
-	public void addCliente(String nome, String senha, Integer cpf,String rg,String dtEmissaoRG, String orgaoEmissor, String habilitacao,
-							String dtNascimento, String sexo, int telefone, String email, String cep,
-							String logradouro, String numero, String bairro, String complemento, String cidade, String uf) throws ParseException {
+	public void addCliente(PessoaFisica pf) throws ParseException {
 		
 		Integer codPessoa = null;
-//		Telefone tel = new Telefone(telefone);
-		Endereco end = new Endereco(logradouro, numero, complemento, bairro, cidade, uf, cep);
+
 //		DocumentoPessoaFisica  dpf = new DocumentoPessoaFisica(cpf, rg, dtEmissaoRG, orgaoEmissor, habilitacao);
 
 //		PessoaFisica pf = new PessoaFisica(codPessoa, nome, email, end, tel, senha, sdf.parse(dtNascimento), sexo, dpf);
 		
 //		Cliente cliente = new Cliente(pf);
-		
-		
-		
-		
-		
-		
-		
+
 		int cod_doc_pf_gerado = 0;
 		int cod_pf_gerado = 0;
 		int cod_pessoa_gerado = 0;

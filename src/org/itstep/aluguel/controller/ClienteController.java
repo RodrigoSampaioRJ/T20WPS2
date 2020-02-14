@@ -14,11 +14,13 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.itstep.aluguel.deserializer.DateDeserializer;
 import org.itstep.aluguel.facade.ClienteFacade;
 import org.itstep.aluguel.model.Cliente;
 import org.itstep.aluguel.model.PessoaFisica;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Path("/cliente")
 public class ClienteController {
@@ -50,17 +52,23 @@ public class ClienteController {
 	@Path("/save")
 	public Response postMsg(String data) {
 		
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-//		Date date = format.parse(datePost);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		System.out.println(data);
 		
+		GsonBuilder gsb = new GsonBuilder();
+		gsb.setDateFormat("dd/MM/yyyy");	
+		gs = gsb.create();
+		
+		
 		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
+		
 		
 		String result = "Nome: " + pf.getNome() + "\n"+
 		"Email: " + pf.getEmail() +"\n" +
 		"Logradouro:" + pf.getEndereco().getLogradouro() +"\n" +
-		"Data Nascimento:" + pf.getDtNascimento();
+		"Data Nascimento:" + sdf.format(pf.getDtNascimento())  +"\n" + 
+		"Data de Emissao: " + sdf.format(pf.getDocumentoPessoaFisica().getDtEmissaoRG());
 		
 		System.out.println(result);
 		

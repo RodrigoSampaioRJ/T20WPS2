@@ -7,7 +7,7 @@ import java.util.Date;
 public class PessoaFisica extends Pessoa {
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	//Atributos da Classe
-	private String 				    dtNascimento;
+	private Date 				    dtNascimento;
 	private String   				sexo;
 	private DocumentoPessoaFisica   documentoPessoaFisica;
 	
@@ -16,7 +16,7 @@ public class PessoaFisica extends Pessoa {
 	}
 	
 	
-	public PessoaFisica(String nome, String email,String senha, Endereco endereco, Telefone telefone, String dtNascimento, String sexo, DocumentoPessoaFisica documentoPessoaFisica) {
+	public PessoaFisica(String nome, String email,String senha, Endereco endereco, Telefone telefone, Date dtNascimento, String sexo, DocumentoPessoaFisica documentoPessoaFisica) {
 		super(nome, email,senha, endereco, telefone);
 		this.dtNascimento = dtNascimento;
 		this.sexo = sexo;
@@ -25,10 +25,10 @@ public class PessoaFisica extends Pessoa {
 	
 	
 	//Getters and Setters
-	public String getDtNascimento() {
+	public Date getDtNascimento() {
 		return dtNascimento;
 	}
-	public void setDtNascimento(String dtNascimento) {
+	public void setDtNascimento(Date dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
 

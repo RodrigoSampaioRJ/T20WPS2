@@ -63,7 +63,7 @@ function teste(){
             documentoPessoaFisica: {
                 cpf: "18388778781",
                 rg: "301941399",
-                dtEmissao: "26/02/1997",
+                dtEmissaoRG: "26/02/1997",
                 orgaoEmissor: "Detran",
                 habilitacao: "12345678912"
             }        

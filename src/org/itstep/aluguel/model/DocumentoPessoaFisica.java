@@ -7,7 +7,7 @@ public class DocumentoPessoaFisica {
 	//Atributos da Classe
 	private String cpf;
 	private String rg;
-	private String   dtEmissaoRG;
+	private Date   dtEmissaoRG;
 	private String orgaoEmissor;
 	private String habilitacao;
 	
@@ -16,7 +16,7 @@ public class DocumentoPessoaFisica {
 	public DocumentoPessoaFisica() {
 	}
 	
-	public DocumentoPessoaFisica(String cpf, String rg, String dtEmissaoRG, String orgaoEmissor, String habilitacao) {
+	public DocumentoPessoaFisica(String cpf, String rg, Date dtEmissaoRG, String orgaoEmissor, String habilitacao) {
 		this.cpf = cpf;
 		this.rg = rg;
 		this.dtEmissaoRG = dtEmissaoRG;
@@ -41,10 +41,10 @@ public class DocumentoPessoaFisica {
 	}
 	
 	
-	public String getDtEmissaoRG() {
+	public Date getDtEmissaoRG() {
 		return dtEmissaoRG;
 	}
-	public void setDtEmissaoRG(String dtEmissaoRG) {
+	public void setDtEmissaoRG(Date dtEmissaoRG) {
 		this.dtEmissaoRG = dtEmissaoRG;
 	}
 	
