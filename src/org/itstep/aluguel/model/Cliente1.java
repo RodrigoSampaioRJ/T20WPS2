@@ -3,15 +3,13 @@ package org.itstep.aluguel.model;
 public class Cliente1 {
 
 	private String nome;
-	private Integer idade;
-
+	private String email;
 	public Cliente1() {
 	}
 
-	public Cliente1(String nome, Integer idade) {
-		super();
+	public Cliente1(String nome, String email) {
 		this.nome = nome;
-		this.idade = idade;
+		this.email = email;
 	}
 
 	public String getNome() {
@@ -22,13 +20,15 @@ public class Cliente1 {
 		this.nome = nome;
 	}
 
-	public Integer getIdade() {
-		return idade;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setIdade(Integer idade) {
-		this.idade = idade;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
+
 	
 	
 	

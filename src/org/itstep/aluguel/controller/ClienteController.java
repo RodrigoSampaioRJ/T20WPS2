@@ -1,9 +1,8 @@
 package org.itstep.aluguel.controller;
 
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -16,9 +15,9 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.itstep.aluguel.deserializer.DateDeserializer;
 import org.itstep.aluguel.facade.ClienteFacade;
 import org.itstep.aluguel.model.Cliente;
+import org.itstep.aluguel.model.Cliente1;
 import org.itstep.aluguel.model.PessoaFisica;
 
 import com.google.gson.Gson;
@@ -46,6 +45,16 @@ public class ClienteController {
 		
 		
 			
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/lista")
+	public List<Cliente1> listaClientes(@Context HttpHeaders httpHeaders) {
+		
+		ClienteFacade clienteFacade = new ClienteFacade();
+	
+		return clienteFacade.findAllClientes();
 	}
 	
 	//TESTE

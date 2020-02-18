@@ -11,7 +11,7 @@ public class JdbcDAOFactory {
 		try {
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			this.connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "System", "root");
+			this.connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SYSTEM", "root");
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao tentar recuperar conexão com o banco de dados ", e);
 		}

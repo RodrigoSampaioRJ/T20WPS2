@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<head>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="source/bootstrap-3.3.6-dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="source/font-awesome-4.5.0/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="style/slider.css">
+<link rel="stylesheet" type="text/css" href="style/mystyle.css">
+
+
+<style type="text/css">
+
+	.form-group.row{
+		margin-bottom:10px;
+	}
+	a:link {
+		 color: white; 
+	}
+	a:visited {
+    color: white;
+	}
+	button{
+		padding: 2px;
+		margin-left: 2px;
+		
+	}
+	
+	
+</style>
+</head>
+<body>
+
+<i class="far fa-trash-alt"></i>
+
+<div class="form-group row">
+	<div class="col-md-6">
+		<button type="button" class="btn btn-primary" ><a href="novo_cliente.jsp"></a>Novo Cliente</button>
+	</div>      
+</div>
+
+<div class="form-group row">
+	<div class="col-md-2">
+	 	<input id="idNome" name="idNome" type="text" placeholder="Nome" class="form-control input-md">
+	</div>
+	<div class="col-md-4">
+		<button type="button" class="btn btn-primary" >Pesquisar</button>
+	</div>     
+	
+</div>
+
+<div class="form-group-row">
+	<div class="col-md-5">
+		<table id="idTbClientes" class="table table-sm table-bordered table-condensed table-hover"></table>
+	</div>
+	
+</div>
+
+
+
+	<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>
+	<script type="text/javascript" src="source/js/isotope.js"></script>
+	<script type="text/javascript" src="source/js/myscript.js"></script>
+	<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.1.11.js"></script>
+	<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/bootstrap.js"></script>   
+   
+   
+</body>
+</html>
+
+<script type="text/javascript" src="js/cadastro.js"></script>

@@ -5,14 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.itstep.aluguel.dao.JdbcDAOFactory;
 import org.itstep.aluguel.model.Cliente;
-import org.itstep.aluguel.model.DocumentoPessoaFisica;
-import org.itstep.aluguel.model.Endereco;
+import org.itstep.aluguel.model.Cliente1;
 import org.itstep.aluguel.model.PessoaFisica;
-import org.itstep.aluguel.model.Telefone;
 
 public class ClienteFacade {
 
@@ -43,6 +43,31 @@ public class ClienteFacade {
 	    	
 	    }
 		return c;
+	}
+	
+	public List<Cliente1>findAllClientes(){
+		
+		List<Cliente1> list = new ArrayList<Cliente1>();
+		
+		try{
+			String sql = "SELECT NOME_PESSOA, EMAIL_PESSOA FROM T20WPS2.TB_PESSOA";
+			
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				list.add(new Cliente1(rs.getString("NOME_PESSOA"),rs.getString("EMAIL_PESSOA")));
+			}
+			rs.close();
+			ps.close();
+			
+		}catch(SQLException e) {
+			throw new RuntimeException();
+		}
+		return list;
+		
+		
 	}
 	
 	
