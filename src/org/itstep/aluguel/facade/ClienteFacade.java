@@ -72,33 +72,34 @@ public class ClienteFacade {
 	
 	
 	
-//	nome+","+senha+","+cpf+","+dtNascimento+","+sexo+","+telefone+","+telefone2+","+email+","+
-//    cep+","+logradouro+","+numero+","+bairro+","+complemento+","+cidade+","+uf,
 
 	public void addCliente(PessoaFisica pf) throws ParseException {
 		
-		Integer codPessoa = null;
-
 //		DocumentoPessoaFisica  dpf = new DocumentoPessoaFisica(cpf, rg, dtEmissaoRG, orgaoEmissor, habilitacao);
 
 //		PessoaFisica pf = new PessoaFisica(codPessoa, nome, email, end, tel, senha, sdf.parse(dtNascimento), sexo, dpf);
 		
-//		Cliente cliente = new Cliente(pf);
+		Cliente cliente = new Cliente(pf);
 
 		int cod_doc_pf_gerado = 0;
 		int cod_pf_gerado = 0;
 		int cod_pessoa_gerado = 0;
-		String sqlInsertDoc = "INSERT INTO T20WPS2.tb_documento_pf (cod_documento_pf, cpf, rg, data_emissao_rg, orgao_emissor_rg, habilitacao) "
-				+ "VALUES (T20WPS2.sq_doc_pf.nextval, ?, ?, ?, ?, ?)";
-		String sqlInsertTel = "INSERT INTO T20WPS2.TB_TELEFONE (cod_telefone, numero) VALUES (T20WPS2.SQ_TELEFONE.NEXTVAL,?";
-		String sqlInsertPessoaF = "INSERT INTO T20WPS2.tb_pf (cod_pf, cod_documento_pf, data_nascimento, sexo) VALUES (t20wps2.sq_pf.nextval, ?,?,?)";
 		
-		String sqlInsertPessoa = "INSERT INTO T20WPS2.tb_pessoa (cod_pessoa, nome_pessoa, email_pessoa, senha_pessoa)\r\n" + 
+		String sqlInsertDoc = "INSERT INTO T20WPS2.tb_documento_pf (cpf, rg, data_emissao_rg, orgao_emissor_rg, habilitacao) "
+				+ "VALUES (?, ?, ?, ?, ?)";
+		
+		String sqlInsertTel = "INSERT INTO T20WPS2.TB_TELEFONE (numero,cod_pessoa) VALUES (?,?)";
+		
+		String sqlInsertPessoaF = "INSERT INTO T20WPS2.tb_pf (cod_documento_pf, data_nascimento, sexo,cod_pessoa) VALUES (?,?,?,?)";
+		
+		String sqlInsertPessoa = "INSERT INTO T20WPS2.tb_pessoa (nome_pessoa, email_pessoa, senha_pessoa)\r\n" + 
 				"VALUES (T20WPS2.sq_pessoa_1.nextval,?,?,?)";
 		
-		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_cliente, cod_pf, cod_pj, data_cadastro)"+
-				"VALUES (T20WPS2.sq_cliente.nextval,?,?,?)";
+		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_pf, cod_pj, data_cadastro)"+
+				"VALUES (?,?,?)";
 		
+		String sqlInsertEndereco = "INSERT INTO T20WPS2.tb_endereco (logradouro,numero,complemento,bairro,cidade,estado,cep,cod_pessoa) VALUES (?,?,?,?,?,?,?,?)";
+		//INSERT DOC PF
 		try {
 			
 		PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertDoc); 
@@ -121,13 +122,35 @@ public class ClienteFacade {
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		System.out.println(cod_doc_pf_gerado);
+		//INSERT PESSOA 
+		try {
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoa);
+			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pessoa.currval from dual");
+			ps.setString(1, pf.getNome());
+			ps.setString(2, pf.getEmail());
+			ps.setString(3, pf.getSenha());
+			
+			if(ps.execute()) {		
+				ResultSet rs = psCod.executeQuery();
+				cod_pessoa_gerado = rs.getInt("CURRVAL");
+				rs.close();
+			}
+			ps.close();
+			psCod.close();
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		
+		//INSERT PESSOA FISICA
 		try {
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoaF);
 			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pf.currval from dual");
 			ps.setInt(1, cod_doc_pf_gerado);
-//			ps.setDate(2, new java.sql.Date(pf.getDtNascimento().getTime()));
-//			ps.setString(3, pf.getSexo());
+			ps.setDate(2, new java.sql.Date(pf.getDtNascimento().getTime()));
+			ps.setString(3, pf.getSexo());
+			ps.setInt(4, cod_pessoa_gerado);
 			
 			if(ps.execute()) {
 				ResultSet rs = psCod.executeQuery();
@@ -140,13 +163,14 @@ public class ClienteFacade {
 			System.out.println(e.getMessage());
 		}
 		
-		//INSERÇAO DA PESSOA CONTINUAR
+
+		//INSERT CLIENTE
 		try {
-			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoa);
-			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pessoa.currval from dual");
-//			ps.setString(1, pf.getNome());
-//			ps.setString(2, pf.getEmail());
-//			ps.setString(3, pf.getSenha());
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertCliente);
+			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_cliente.currval from dual");
+			ps.setInt(1, cod_pf_gerado);
+			ps.setString(2, null);
+			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
 			
 			if(ps.execute()) {		
 				ResultSet rs = psCod.executeQuery();
@@ -159,24 +183,37 @@ public class ClienteFacade {
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+		//INSERT TELEFONE
 		try {
-			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertCliente);
-			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_cliente.currval from dual");
-			ps.setInt(1, cod_pf_gerado);
-			ps.setString(2, null);
-//			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
-			
-			if(ps.execute()) {		
-				ResultSet rs = psCod.executeQuery();
-				cod_pessoa_gerado = rs.getInt("CURRVAL");
-				rs.close();
-			}
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertTel);
+			ps.setInt(1, Integer.parseInt(pf.getTelefone().getNumero()));
+			ps.setInt(2, cod_pessoa_gerado);
+			ps.execute();
 			ps.close();
-			psCod.close();
 			
-		}catch (Exception e) {
-			// TODO: handle exception
+			
+		}catch(SQLException e) {
+			throw new RuntimeException();
+		}
+		
+		//INSERT ENDERECO
+		try {
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertEndereco);
+			ps.setString(1, pf.getEndereco().getLogradouro());
+			ps.setInt(2, pf.getEndereco().getNumero());
+			ps.setString(3, pf.getEndereco().getComplemento());
+			ps.setString(4, pf.getEndereco().getBairro());
+			ps.setString(5, pf.getEndereco().getCidade());
+			ps.setString(6, pf.getEndereco().getEstado());
+			ps.setInt(7, pf.getEndereco().getCep());
+			ps.setInt(8, cod_pessoa_gerado);
+			
+			ps.execute();
+			ps.close();
+			
+			
+		}catch(SQLException e) {
+			throw new RuntimeException();
 		}
 		
 	}

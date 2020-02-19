@@ -4,19 +4,19 @@ public class Endereco {
 	
 	//Atributos da Classe
 	private String logradouro;
-	private String numero;
+	private int numero;
 	private String complemento;
 	private String bairro;
 	private String cidade;
 	private String uf;
-	private String cep;
+	private int cep;
 	
 	
 	
 	public Endereco() {
 	}
-	public Endereco(String logradouro, String numero, String complemento, String bairro, String cidade, String uf,
-			String cep) {
+	public Endereco(String logradouro, int numero, String complemento, String bairro, String cidade, String uf,
+			int cep) {
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
@@ -34,10 +34,10 @@ public class Endereco {
 	}
 	
 	
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 	
@@ -74,10 +74,10 @@ public class Endereco {
 	}
 	
 	
-	public String getCep() {
+	public int getCep() {
 		return cep;
 	}
-	public void setCep(String cep) {
+	public void setCep(int cep) {
 		this.cep = cep;
 	}
 	

@@ -227,7 +227,7 @@
 </body>
 </html>
 
-<script type="text/javascript" src="js/cadastro_de_cliente.js"></script>
+<script type="text/javascript" src="js/novo_cliente.js"></script>
 
 
 <script type="text/javascript">
