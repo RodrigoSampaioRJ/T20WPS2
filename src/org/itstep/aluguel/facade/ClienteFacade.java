@@ -45,6 +45,30 @@ public class ClienteFacade {
 		return c;
 	}
 	
+	public List<Cliente1>findClienteByName(String nome){
+		
+		List<Cliente1> list = new ArrayList<Cliente1>();
+		
+		try{
+			String sql = "SELECT NOME_PESSOA, EMAIL_PESSOA FROM T20WPS2.TB_PESSOA WHERE NOME_PESSOA= ?";
+			
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
+			ps.setString(1, nome.toUpperCase());
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				list.add(new Cliente1(rs.getString("NOME_PESSOA"),rs.getString("EMAIL_PESSOA")));
+			}
+			rs.close();
+			ps.close();
+			
+		}catch(SQLException e) {
+			throw new RuntimeException();
+		}
+		return list;	
+	}
+	
+	
 	public List<Cliente1>findAllClientes(){
 		
 		List<Cliente1> list = new ArrayList<Cliente1>();
@@ -65,9 +89,7 @@ public class ClienteFacade {
 		}catch(SQLException e) {
 			throw new RuntimeException();
 		}
-		return list;
-		
-		
+		return list;	
 	}
 	
 	

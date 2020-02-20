@@ -9,6 +9,7 @@
 	href="source/font-awesome-4.5.0/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="style/slider.css">
 <link rel="stylesheet" type="text/css" href="style/mystyle.css">
+<script defer src="source/fontawesome-free-5.12.1-web/js/all.js"></script>
 
 
 <style type="text/css">
@@ -27,17 +28,17 @@
 		margin-left: 2px;
 		
 	}
+
 	
 	
 </style>
 </head>
 <body>
 
-<i class="far fa-trash-alt"></i>
 
 <div class="form-group row">
 	<div class="col-md-6">
-		<button type="button" class="btn btn-primary" ><a href="novo_cliente.jsp"></a>Novo Cliente</button>
+		<a href="novo_cliente.jsp"><button type="button" class="btn btn-primary" >Novo Cliente</button></a>
 	</div>      
 </div>
 
@@ -46,7 +47,7 @@
 	 	<input id="idNome" name="idNome" type="text" placeholder="Nome" class="form-control input-md">
 	</div>
 	<div class="col-md-4">
-		<button type="button" class="btn btn-primary" >Pesquisar</button>
+		<button type="button" class="btn btn-primary" onclick="findClienteByName();">Pesquisar</button>
 	</div>     
 	
 </div>
@@ -57,7 +58,6 @@
 	</div>
 	
 </div>
-
 
 
 	<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>

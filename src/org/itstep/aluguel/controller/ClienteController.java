@@ -13,7 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import javax.xml.ws.RequestWrapper;
 
 import org.itstep.aluguel.facade.ClienteFacade;
 import org.itstep.aluguel.model.Cliente;
@@ -22,6 +24,7 @@ import org.itstep.aluguel.model.PessoaFisica;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sun.jersey.api.client.RequestBuilder;
 
 @Path("/cliente")
 public class ClienteController {
@@ -38,6 +41,20 @@ public class ClienteController {
 		return clienteFacade.buscaCliente(codigo);
 	}
 	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("search={nome}")
+	public List<Cliente1> findClienteByName(@Context HttpHeaders httpHeaders,
+											@PathParam ("nome") String nome) {
+		
+		ClienteFacade clienteFacade = new ClienteFacade();
+	
+		return clienteFacade.findClienteByName(nome);
+	}
+	
+	
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/cadastro")
@@ -47,15 +64,20 @@ public class ClienteController {
 			
 	}
 	
+	
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/lista")
-	public List<Cliente1> listaClientes(@Context HttpHeaders httpHeaders) {
+	public List<Cliente1> findAllClientes(@Context HttpHeaders httpHeaders) {
 		
 		ClienteFacade clienteFacade = new ClienteFacade();
 	
 		return clienteFacade.findAllClientes();
 	}
+	
+	
+
 	
 	//TESTE
 	@POST
