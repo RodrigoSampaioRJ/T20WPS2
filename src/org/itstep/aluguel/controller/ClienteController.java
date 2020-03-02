@@ -13,18 +13,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
-import javax.xml.ws.RequestWrapper;
 
 import org.itstep.aluguel.facade.ClienteFacade;
 import org.itstep.aluguel.model.Cliente;
 import org.itstep.aluguel.model.Cliente1;
+import org.itstep.aluguel.model.Pessoa;
 import org.itstep.aluguel.model.PessoaFisica;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.jersey.api.client.RequestBuilder;
 
 @Path("/cliente")
 public class ClienteController {
@@ -66,15 +64,15 @@ public class ClienteController {
 	
 	
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/lista")
-	public List<Cliente1> findAllClientes(@Context HttpHeaders httpHeaders) {
-		
-		ClienteFacade clienteFacade = new ClienteFacade();
-	
-		return clienteFacade.findAllClientes();
-	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Path("/lista")
+//	public List<Cliente> findAllClientes(@Context HttpHeaders httpHeaders) {
+//		
+//		ClienteFacade clienteFacade = new ClienteFacade();
+//	
+//		return clienteFacade.findAllClientes();
+//	}
 	
 	
 
@@ -110,6 +108,7 @@ public class ClienteController {
 		"Logradouro:" + pf.getEndereco().getLogradouro() +"\n" +
 		"Data Nascimento:" + sdf.format(pf.getDtNascimento())  +"\n" + 
 		"Data de Emissao: " + sdf.format(pf.getDocumentoPessoaFisica().getDtEmissaoRG());
+		
 		
 		System.out.println(result);
 		

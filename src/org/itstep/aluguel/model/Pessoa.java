@@ -25,6 +25,12 @@ public abstract class Pessoa {
 		this.telefone = telefone;
 		
 	}
+	public Pessoa(String nome, String email) {
+//		this.codPessoa = codPessoa;
+		this.nome = nome;
+		this.email = email;
+		
+	}
 	//Getters and Setters
 //	public Integer getCodPessoa() {
 //		return codPessoa;
