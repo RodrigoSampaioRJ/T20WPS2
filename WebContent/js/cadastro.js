@@ -16,10 +16,10 @@ $.ajax({
 		for (var i = 0; i < resultLista.length; i++) {
 
 			html += "<tr>"
-				+ "<td>" + resultLista[i].nome + "</td>"
-				+ "<td>" + resultLista[i].email + "</td>"
-				+ "<td>" + "<i class=fas fa-trash-alt fa-2x></i>" + "</td>"
-				+ "<td>" + "<i class=fas fa-edit fa-2x></i>" + "</td>"
+				+ "<td>" + resultLista[i].pessoaFisica.nome + "</td>"
+				+ "<td>" + resultLista[i].pessoaFisica.email + "</td>"
+				+ "<td>" + "<i class=\"fas fa-trash-alt fa-2x\"></i>" + "</td>"
+				+ "<td>" + "<i class=\"fas fa-edit fa-2x\"></i>" + "</td>"
 				+ "</tr>";
 		}
 

@@ -12,8 +12,11 @@ import java.util.List;
 import org.itstep.aluguel.dao.JdbcDAOFactory;
 import org.itstep.aluguel.model.Cliente;
 import org.itstep.aluguel.model.Cliente1;
+import org.itstep.aluguel.model.DocumentoPessoaFisica;
+import org.itstep.aluguel.model.Endereco;
 import org.itstep.aluguel.model.Pessoa;
 import org.itstep.aluguel.model.PessoaFisica;
+import org.itstep.aluguel.model.Telefone;
 
 public class ClienteFacade {
 
@@ -69,39 +72,59 @@ public class ClienteFacade {
 		return list;
 	}
 
-//	public List<Cliente> findAllClientes() {
-//
-//		List<Cliente> list = new ArrayList<Cliente>();
-//
-//		try {
-//			String sql = "SELECT COD_PF FROM T20WPS2.TB_CLIENTE";
-//
-//			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
-//
-//			ResultSet rs = ps.executeQuery();
-//
-//			while (rs.next()) {
-//				sql = "SELECT COD_PESSOA FROM T20WPS2.TB_PF WHERE COD_PF = ?";
-//				ps = jdbc.getConexao().prepareStatement(sql);
-//				ps.setInt(1, rs.getInt("COD_PF"));
-//				rs.close();
-//				rs = ps.executeQuery();
-//				while(rs.next()) {
-//					sql = "SELECT NOME_PESSOA, EMAIL_PESSOA FROM T20WPS2.TB_PESSOA";
-//					PessoaFisica pf = new PessoaFisica(rs.getString("NOME_PESSOA"), email, senha, endereco, telefone, dtNascimento, sexo, documentoPessoaFisica);
-//				}
-//			}
-//			rs.close();
-//			ps.close();
-//
-//		} catch (SQLException e) {
-//			throw new RuntimeException();
-//		}
-//		return list;
-//	}
+	public List<Cliente> findAllClientes() {
+
+		List<Cliente> list = new ArrayList<Cliente>();
+
+		try {
+			String sql = "SELECT p.nome_pessoa, p.email_pessoa, p.senha_pessoa,t.numero,\n"
+					+ "pf.data_nascimento,pf.sexo,\n"
+					+ "dpf.cpf, dpf.data_emissao_rg, dpf.habilitacao, dpf.orgao_emissor_rg, dpf.rg,\n"
+					+ "e.logradouro, e.numero_endereco, e.complemento, e.estado, e.cidade, e.bairro,e.cep\n"
+					+ "FROM t20wps2.tb_pessoa p\r\n" + "JOIN t20wps2.tb_pf pf ON p.cod_pessoa = pf.cod_pessoa\n"
+					+ "JOIN t20wps2.tb_cliente c ON pf.cod_pf = c.cod_pf \n"
+					+ "JOIN t20wps2.tb_endereco e ON p.cod_pessoa = e.cod_pessoa\n"
+					+ "JOIN t20wps2.tb_telefone t ON p.cod_pessoa = t.cod_pessoa\n"
+					+ "JOIN T20WPS2.tb_documento_pf dpf ON pf.cod_documento_pf = dpf.cod_documento_pf";
+
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				Endereco endereco = new Endereco(rs.getString("LOGRADOURO"), rs.getInt("NUMERO_ENDERECO"),
+						rs.getString("COMPLEMENTO"), rs.getString("BAIRRO"), rs.getString("CIDADE"),
+						rs.getString("ESTADO"), rs.getInt("CEP"));
+
+				Telefone telefone = new Telefone(rs.getString("NUMERO"));
+
+				Date dtNascimento = rs.getDate("DATA_NASCIMENTO");
+
+				Date dtEmissaoRG = rs.getDate("DATA_EMISSAO_RG");
+
+				DocumentoPessoaFisica documentoPessoaFisica = new DocumentoPessoaFisica(rs.getString("CPF"),
+						rs.getString("RG"), dtEmissaoRG, rs.getString("ORGAO_EMISSOR_RG"), rs.getString("HABILITACAO"));
+
+				PessoaFisica pessoaFisica = new PessoaFisica(rs.getString("NOME_PESSOA"), rs.getString("EMAIL_PESSOA"),
+						rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento, rs.getString("SEXO"),
+						documentoPessoaFisica);
+
+				Cliente cliente = new Cliente(pessoaFisica);
+
+				list.add(cliente);
+
+			}
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
 
 	public void addCliente(PessoaFisica pf) throws ParseException {
-
 
 		Cliente cliente = new Cliente(pf);
 
@@ -122,7 +145,7 @@ public class ClienteFacade {
 
 		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_pf, cod_pj, data_cadastro)" + "VALUES (?,?,?)";
 
-		String sqlInsertEndereco = "INSERT INTO T20WPS2.tb_endereco (logradouro,numero,complemento,bairro,cidade,estado,cep,cod_pessoa) VALUES (?,?,?,?,?,?,?,?)";
+		String sqlInsertEndereco = "INSERT INTO T20WPS2.tb_endereco (logradouro,numero_endereco,complemento,bairro,cidade,estado,cep,cod_pessoa) VALUES (?,?,?,?,?,?,?,?)";
 
 		// INSERT DOC PF
 		try {
@@ -189,8 +212,7 @@ public class ClienteFacade {
 				cod_cliente_gerado = rs.getInt("CURRVAL");
 			}
 			ps = null;
-			
-			
+
 			// INSERT TELEFONE
 
 			ps = jdbc.getConexao().prepareStatement(sqlInsertTel);
@@ -215,9 +237,7 @@ public class ClienteFacade {
 			ps.close();
 			psCod.close();
 
-		} catch (
-
-		SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		System.out.println(cod_doc_pf_gerado);

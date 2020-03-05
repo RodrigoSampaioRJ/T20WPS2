@@ -64,15 +64,15 @@ public class ClienteController {
 	
 	
 	
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Path("/lista")
-//	public List<Cliente> findAllClientes(@Context HttpHeaders httpHeaders) {
-//		
-//		ClienteFacade clienteFacade = new ClienteFacade();
-//	
-//		return clienteFacade.findAllClientes();
-//	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/lista")
+	public List<Cliente> findAllClientes(@Context HttpHeaders httpHeaders) {
+		
+		ClienteFacade clienteFacade = new ClienteFacade();
+	
+		return clienteFacade.findAllClientes();
+	}
 	
 	
 
