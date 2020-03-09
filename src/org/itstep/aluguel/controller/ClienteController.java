@@ -28,65 +28,53 @@ import com.google.gson.GsonBuilder;
 @Path("/cliente")
 public class ClienteController {
 	Gson gs = new Gson();
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{codigo}")
-	public Cliente buscaCliente (@Context HttpHeaders httpHeaders,
-								@PathParam ("codigo") Integer codigo) {
-		
+	public Cliente buscaCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
+
 		ClienteFacade clienteFacade = new ClienteFacade();
-	
+
 		return clienteFacade.buscaCliente(codigo);
 	}
-	
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("search={nome}")
-	public List<Cliente1> findClienteByName(@Context HttpHeaders httpHeaders,
-											@PathParam ("nome") String nome) {
-		
+	public List<Cliente1> findClienteByName(@Context HttpHeaders httpHeaders, @PathParam("nome") String nome) {
+
 		ClienteFacade clienteFacade = new ClienteFacade();
-	
+
 		return clienteFacade.findClienteByName(nome);
 	}
-	
-	
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/cadastro")
-	public void cadastraCliente (@Context HttpHeaders httpHeaders) {
-		
-		
-			
+	public void cadastraCliente(@Context HttpHeaders httpHeaders) {
+
 	}
-	
-	
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/lista")
 	public List<Cliente> findAllClientes(@Context HttpHeaders httpHeaders) {
-		
+
 		ClienteFacade clienteFacade = new ClienteFacade();
-	
+
 		return clienteFacade.findAllClientes();
 	}
-	
-	
 
-	
-	//TESTE
+	// TESTE
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Path("/save")
-	public Response addCliente(String data) {
+	public Response addCliente(String data) throws ParseException, SQLException {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		
+		System.out.println(data);
 		GsonBuilder gsb = new GsonBuilder();
 		gsb.setDateFormat("dd/MM/yyyy");	
 		gs = gsb.create();	
@@ -94,31 +82,20 @@ public class ClienteController {
 		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
 		
 		ClienteFacade clienteFacade = new ClienteFacade();
-		
-		try{
-			
-			if(clienteFacade.addCliente(pf)) {
-				return Response.status(200).build();
-			}else {
-				return Response.status(400).build(); 
-			}
-			
-		}catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}catch(SQLException e) {
-			System.out.println(e.getMessage());
-		}
+
 		
 		String result = "Nome: " + pf.getNome() + "\n"+
 		"Email: " + pf.getEmail() +"\n" +
 		"Logradouro:" + pf.getEndereco().getLogradouro() +"\n" +
 		"Data Nascimento:" + sdf.format(pf.getDtNascimento())  +"\n" + 
 		"Data de Emissao: " + sdf.format(pf.getDocumentoPessoaFisica().getDtEmissaoRG());
-		
-		
-		System.out.println(result);
-		
-		
+
+		if(clienteFacade.addCliente(pf)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(400).build();
+		}
+
 		
 		//return Response.status(200).entity(result).build();
 	}

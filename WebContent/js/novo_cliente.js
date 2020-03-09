@@ -61,7 +61,7 @@ function teste(){
        $.ajax({
         type : "POST",
         url : "http://localhost:9080/AluguelCarros/aluguelRest/cliente/save",
-		//data : JSON.stringify(json),
+		data : JSON.stringify(json),
 		async : false,
         cache : false,
         contentType: "text/plain",
