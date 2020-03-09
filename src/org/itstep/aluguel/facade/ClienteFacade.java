@@ -124,7 +124,7 @@ public class ClienteFacade {
 		return list;
 	}
 
-	public void addCliente(PessoaFisica pf) throws ParseException {
+	public boolean addCliente(PessoaFisica pf) throws ParseException, SQLException {
 
 		Cliente cliente = new Cliente(pf);
 
@@ -236,108 +236,13 @@ public class ClienteFacade {
 
 			ps.close();
 			psCod.close();
-
+			return true;
 		} catch (SQLException e) {
+			
 			System.out.println(e.getMessage());
+			return false;
 		}
-		System.out.println(cod_doc_pf_gerado);
-		System.out.println(cod_cliente_gerado);
-		System.out.println(cod_pessoa_gerado);
-		System.out.println(cod_pf_gerado);
 
-//		//INSERT PESSOA 
-//		try {
-//			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoa);
-//			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pessoa.currval from dual");
-//			ps.setString(1, pf.getNome());
-//			ps.setString(2, pf.getEmail());
-//			ps.setString(3, pf.getSenha());
-//			
-//			if(ps.execute()) {		
-//				ResultSet rs = psCod.executeQuery();
-//				cod_pessoa_gerado = rs.getInt("CURRVAL");
-//				rs.close();
-//			}
-//			ps.close();
-//			psCod.close();
-//			
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		
-//		//INSERT PESSOA FISICA
-//		try {
-//			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertPessoaF);
-//			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pf.currval from dual");
-//			ps.setInt(1, cod_doc_pf_gerado);
-//			ps.setDate(2, new java.sql.Date(pf.getDtNascimento().getTime()));
-//			ps.setString(3, pf.getSexo());
-//			ps.setInt(4, cod_pessoa_gerado);
-//			
-//			if(ps.execute()) {
-//				ResultSet rs = psCod.executeQuery();
-//				cod_pf_gerado = rs.getInt("CURRVAL");
-//				rs.close();
-//			}
-//			ps.close();
-//			psCod.close();
-//		}catch(SQLException e) {
-//			System.out.println(e.getMessage());
-//		}
-//		
-//
-//		//INSERT CLIENTE
-//		try {
-//			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertCliente);
-//			PreparedStatement psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_cliente.currval from dual");
-//			ps.setInt(1, cod_pf_gerado);
-//			ps.setString(2, null);
-//			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
-//			
-//			if(ps.execute()) {		
-//				ResultSet rs = psCod.executeQuery();
-//				cod_pessoa_gerado = rs.getInt("CURRVAL");
-//				rs.close();
-//			}
-//			ps.close();
-//			psCod.close();
-//			
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		//INSERT TELEFONE
-//		try {
-//			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertTel);
-//			ps.setInt(1, Integer.parseInt(pf.getTelefone().getNumero()));
-//			ps.setInt(2, cod_pessoa_gerado);
-//			ps.execute();
-//			ps.close();
-//			
-//			
-//		}catch(SQLException e) {
-//			throw new RuntimeException();
-//		}
-//		
-//		//INSERT ENDERECO
-//		try {
-//			PreparedStatement ps = jdbc.getConexao().prepareStatement(sqlInsertEndereco);
-//			ps.setString(1, pf.getEndereco().getLogradouro());
-//			ps.setInt(2, pf.getEndereco().getNumero());
-//			ps.setString(3, pf.getEndereco().getComplemento());
-//			ps.setString(4, pf.getEndereco().getBairro());
-//			ps.setString(5, pf.getEndereco().getCidade());
-//			ps.setString(6, pf.getEndereco().getEstado());
-//			ps.setInt(7, pf.getEndereco().getCep());
-//			ps.setInt(8, cod_pessoa_gerado);
-//			
-//			ps.execute();
-//			ps.close();
-//			
-//			
-//		}catch(SQLException e) {
-//			throw new RuntimeException();
-//		}
-//		
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.itstep.aluguel.controller;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -81,25 +82,30 @@ public class ClienteController {
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Path("/save")
-	public Response postMsg(String data) {
+	public Response addCliente(String data) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		System.out.println(data);
 		
 		GsonBuilder gsb = new GsonBuilder();
 		gsb.setDateFormat("dd/MM/yyyy");	
-		gs = gsb.create();
-		
+		gs = gsb.create();	
 		
 		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
 		
 		ClienteFacade clienteFacade = new ClienteFacade();
 		
 		try{
-			clienteFacade.addCliente(pf);
+			
+			if(clienteFacade.addCliente(pf)) {
+				return Response.status(200).build();
+			}else {
+				return Response.status(400).build(); 
+			}
 			
 		}catch (ParseException e) {
+			System.out.println(e.getMessage());
+		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		
@@ -112,7 +118,9 @@ public class ClienteController {
 		
 		System.out.println(result);
 		
-		return Response.status(200).entity(result).build();
+		
+		
+		//return Response.status(200).entity(result).build();
 	}
 	
 }

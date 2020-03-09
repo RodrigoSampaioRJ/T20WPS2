@@ -22,66 +22,58 @@ var baseURL = "http://localhost:9080/AluguelCarros/aluguelRest/cliente/"
 // var dtEmissao= $("#idDtEmissao").val();
 
 
-function cadastro()  {
-
-    
-     $.ajax({
-        type : "POST",
-        url : baseURL+"cadastro",
-		data : nome+","+senha+","+cpf+","+rg+","+habilitacao+","+orgaoEmissor+","+dtEmissao+","+dtNascimento+","+sexo+","+telefone+","+telefone2+","+email+","+
-        cep+","+logradouro+","+numero+","+bairro+","+complemento+","+cidade+","+uf,
-		async : false,
-		cache : false,
-		dataType : 'string',
-        success : 
-        alert("Enviado")
-
-    });
-}
-
-
 function teste(){
 
+	
+	var tel = $("#idTelefone1").val().replace(" ", "").replace("-", "");
+	
+	alert(tel);
     var json = {   
-            nome: "Rodrigo",
-            email: "digo.15rj@gmail.com",
-            senha: "1234",
+            nome: $('#idNome').val(),
+            email: $("#idEmail").val(),
+            senha: $('#idSenha').val(),
             endereco: {
-                logradouro: "Estrada dos Tres Rios",
-                numero: "670",
-                complemento: "202",
-                bairro: "Freguesia",
-                cidade: "Rio de Janeiro",
-                uf: "RJ",
-                cep: "22745005"
+                logradouro: $("#idRua").val(),
+                numero: $("#idNumero").val(),
+                complemento: $("#idComplemento").val(),
+                bairro: $("#idBairro").val(),
+                cidade: $("#idCidade").val(),
+                uf: $("#idUf").val(),
+                cep: $("#idCep").val()
             },
              telefone: {
-                numero: "21982385725"
+                numero: tel
             },
-            dtNascimento: "26/02/1997",
-            sexo: "masculino",
+            dtNascimento: $('#idDtNasc').val(),
+            sexo: $("input[name='sexo']:checked").val(),
             documentoPessoaFisica: {
-                cpf: "18388778781",
-                rg: "301941399",
-                dtEmissaoRG: "26/02/1997",
-                orgaoEmissor: "Detran",
-                habilitacao: "12345678912"
+                cpf: $('#idCpf').val(),
+                rg: $("#idRg").val(),
+                dtEmissaoRG: $("#idDtEmissao").val(),
+                orgaoEmissor: $("#idOrgao").val(),
+                habilitacao: $("#idHabilitacao").val()
             }        
     } 
     
     
 
 
-         $.ajax({
+       $.ajax({
         type : "POST",
         url : "http://localhost:9080/AluguelCarros/aluguelRest/cliente/save",
-		data : JSON.stringify(json),
+		//data : JSON.stringify(json),
 		async : false,
         cache : false,
         contentType: "text/plain",
 		dataType : 'text',
-        success: 
-        alert("Enviado")
+        success: function(retorno){
+        	
+        	if(retorno.status == 200){
+        		load("cadastro.jsp");
+        	}
+        }
+        
+        
 
     });
 }
@@ -98,49 +90,3 @@ function formatar(mascara, documento){
   }
   
 }
-
-
-
-
-//-----------------------------------------API VIACEP-------------------------------------------//
-// function pesquisacep(valor) {
-
-//         //Nova variável "cep" somente com dígitos.
-//         var cep = valor.replace(/\D/g, '');
-
-//         //Verifica se campo cep possui valor informado.
-//         if (cep !== "") {
-
-//             //Expressão regular para validar o CEP.
-//             var validacep = /^[0-9]{8}$/;
-
-//             //Valida o formato do CEP.
-//             if(validacep.test(cep)) {
-
-//                 //Preenche os campos com "..." enquanto consulta webservice.
-//                 document.getElementById("rua").value="...";
-//                 document.getElementById("bairro").value="...";
-//                 document.getElementById("cidade").value="...";
-//                 document.getElementById("estado").value="...";
-
-//                 //Cria um elemento javascript.
-//                 var script = document.createElement("script");
-
-//                 //Sincroniza com o callback.
-//                 script.src = "/viacep.com.br/ws/"+ cep + "/json" + "?callback=callback_name";
-
-//                 //Insere script no documento e carrega o conteúdo.
-//                 document.body.appendChild(script);
-
-//             } //end if.
-//             else {
-//                 //cep é inválido.
-//                 limpa_formulario_cep();
-//                 alert("Formato de CEP inválido.");
-//             }
-//         } //end if.
-//         else {
-//             //cep sem valor, limpa formulário.
-//             limpa_formulario_cep();
-//         }
-//     }
