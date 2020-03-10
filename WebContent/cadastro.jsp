@@ -18,15 +18,14 @@
 		margin-bottom:10px;
 	}
 	a:link {
-		 color: white; 
+		color: white; 
 	}
 	a:visited {
-    color: white;
+    	color: white;
 	}
 	button{
 		padding: 2px;
-		margin-left: 2px;
-		
+		margin-left: 2px;	
 	}
 
 	

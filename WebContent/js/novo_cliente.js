@@ -26,8 +26,7 @@ function teste(){
 
 	
 	var tel = $("#idTelefone1").val().replace(" ", "").replace("-", "");
-	
-	alert(tel);
+
     var json = {   
             nome: $('#idNome').val(),
             email: $("#idEmail").val(),
@@ -66,11 +65,12 @@ function teste(){
         cache : false,
         contentType: "text/plain",
 		dataType : 'text',
-        success: function(retorno){
-        	
-        	if(retorno.status == 200){
-        		load("cadastro.jsp");
-        	}
+        success: function(){
+            
+        	window.location.href = "cadastro.jsp";	
+        },
+        error: function(){
+            alert("error");
         }
         
         

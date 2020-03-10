@@ -5,7 +5,7 @@ import java.util.Date;
 public abstract class Pessoa {
 	
 	//Atributos da Classe
-//	private Integer codPessoa;
+    private Integer  codPessoa;
 	private String   nome;
 	private String   email;
 	private String   senha;
@@ -16,8 +16,8 @@ public abstract class Pessoa {
 	public Pessoa() {
 	}
 	
-	public Pessoa(String nome, String email,String senha, Endereco endereco, Telefone telefone) {
-//		this.codPessoa = codPessoa;
+	public Pessoa(Integer codPessoa, String nome, String email,String senha, Endereco endereco, Telefone telefone) {
+		this.codPessoa = codPessoa;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
@@ -25,19 +25,19 @@ public abstract class Pessoa {
 		this.telefone = telefone;
 		
 	}
-	public Pessoa(String nome, String email) {
-//		this.codPessoa = codPessoa;
+	public Pessoa(Integer codPessoa, String nome, String email) {
+		this.codPessoa = codPessoa;
 		this.nome = nome;
 		this.email = email;
 		
 	}
 	//Getters and Setters
-//	public Integer getCodPessoa() {
-//		return codPessoa;
-//	}
-//	public void setCodPessoa(Integer codPessoa) {
-//		this.codPessoa = codPessoa;
-//	}
+	public Integer getCodPessoa() {
+		return codPessoa;
+	}
+	public void setCodPessoa(Integer codPessoa) {
+		this.codPessoa = codPessoa;
+	}
 	
 
 	public String getNome() {

@@ -15,11 +15,11 @@ $.ajax({
 		html += "<tbody>";
 		for (var i = 0; i < resultLista.length; i++) {
 
-			html += "<tr>"
+			html += "<tr>" + resultLista.pessoaFisica.codPessoa 
 				+ "<td>" + resultLista[i].pessoaFisica.nome + "</td>"
 				+ "<td>" + resultLista[i].pessoaFisica.email + "</td>"
-				+ "<td>" + "<i class=\"fas fa-trash-alt fa-2x\"></i>" + "</td>"
-				+ "<td>" + "<i class=\"fas fa-edit fa-2x\"></i>" + "</td>"
+				+ "<td>" + "<i class=\"fas fa-trash-alt fa-2x\"></i>" + "</td></a>"
+				+ "<b class=delete_cliente><a href="+baseURL+"excluir="+resultLista.pessoaFisica.codPessoa+">"+ "<td>" + "<i class=\"fas fa-edit fa-2x\"></i>" + "</td></a></b>"
 				+ "</tr>";
 		}
 

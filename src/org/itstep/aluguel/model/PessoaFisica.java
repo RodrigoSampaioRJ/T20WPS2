@@ -16,8 +16,8 @@ public class PessoaFisica extends Pessoa {
 	}
 	
 	
-	public PessoaFisica(String nome, String email,String senha, Endereco endereco, Telefone telefone, Date dtNascimento, String sexo, DocumentoPessoaFisica documentoPessoaFisica) {
-		super(nome, email,senha, endereco, telefone);
+	public PessoaFisica(Integer codPessoa, String nome, String email,String senha, Endereco endereco, Telefone telefone, Date dtNascimento, String sexo, DocumentoPessoaFisica documentoPessoaFisica) {
+		super(codPessoa,nome, email,senha, endereco, telefone);
 		this.dtNascimento = dtNascimento;
 		this.sexo = sexo;
 		this.documentoPessoaFisica = documentoPessoaFisica;

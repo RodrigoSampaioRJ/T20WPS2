@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,8 +19,6 @@ import javax.ws.rs.core.Response;
 
 import org.itstep.aluguel.facade.ClienteFacade;
 import org.itstep.aluguel.model.Cliente;
-import org.itstep.aluguel.model.Cliente1;
-import org.itstep.aluguel.model.Pessoa;
 import org.itstep.aluguel.model.PessoaFisica;
 
 import com.google.gson.Gson;
@@ -32,28 +31,21 @@ public class ClienteController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{codigo}")
-	public Cliente buscaCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
+	public Cliente findClienteByCodigo(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
 
 		ClienteFacade clienteFacade = new ClienteFacade();
 
-		return clienteFacade.buscaCliente(codigo);
+		return clienteFacade.findClienteByCodigo(codigo);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("search={nome}")
-	public List<Cliente1> findClienteByName(@Context HttpHeaders httpHeaders, @PathParam("nome") String nome) {
+	public List<Cliente> findClienteByName(@Context HttpHeaders httpHeaders, @PathParam("nome") String nome) {
 
 		ClienteFacade clienteFacade = new ClienteFacade();
 
 		return clienteFacade.findClienteByName(nome);
-	}
-
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/cadastro")
-	public void cadastraCliente(@Context HttpHeaders httpHeaders) {
-
 	}
 
 	@GET
@@ -65,8 +57,7 @@ public class ClienteController {
 
 		return clienteFacade.findAllClientes();
 	}
-
-	// TESTE
+	
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Path("/save")
@@ -93,11 +84,20 @@ public class ClienteController {
 		if(clienteFacade.addCliente(pf)) {
 			return Response.status(200).build();
 		}else {
-			return Response.status(400).build();
+			return Response.status(500).build();
 		}
-
-		
 		//return Response.status(200).entity(result).build();
 	}
+	
+//	@DELETE
+//	@Consumes(MediaType.TEXT_PLAIN)
+//	@Path("excluir={codigo}")
+//	public Response deleteCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
+//		
+//		
+//	
+//	}
+	
+
 	
 }
