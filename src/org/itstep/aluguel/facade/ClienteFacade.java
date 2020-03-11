@@ -13,7 +13,6 @@ import org.itstep.aluguel.dao.JdbcDAOFactory;
 import org.itstep.aluguel.model.Cliente;
 import org.itstep.aluguel.model.DocumentoPessoaFisica;
 import org.itstep.aluguel.model.Endereco;
-import org.itstep.aluguel.model.Pessoa;
 import org.itstep.aluguel.model.PessoaFisica;
 import org.itstep.aluguel.model.Telefone;
 
@@ -190,11 +189,11 @@ public class ClienteFacade {
 	public boolean addCliente(PessoaFisica pf) throws ParseException, SQLException {
 
 		Cliente cliente = new Cliente();
-
+		cliente.setDtCadastro(new Date());
+		
 		int cod_doc_pf_gerado = 0;
 		int cod_pf_gerado = 0;
 		int cod_pessoa_gerado = 0;
-		int cod_cliente_gerado = 0;
 
 		String sqlInsertDoc = "INSERT INTO T20WPS2.tb_documento_pf (cpf, rg, data_emissao_rg, orgao_emissor_rg, habilitacao) "
 				+ "VALUES (?, ?, ?, ?, ?)";
@@ -270,10 +269,8 @@ public class ClienteFacade {
 			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
 			ps.execute();
 
-			rs = psCod.executeQuery();
-			while (rs.next()) {
-				cod_cliente_gerado = rs.getInt("CURRVAL");
-			}
+			
+			
 			ps = null;
 
 			// INSERT TELEFONE
@@ -295,7 +292,7 @@ public class ClienteFacade {
 			ps.setInt(8, cod_pessoa_gerado);
 
 			ps.execute();
-			rs.close();
+			
 
 			ps.close();
 			psCod.close();
@@ -309,30 +306,44 @@ public class ClienteFacade {
 	}
 	
 	public boolean deleteCliente(Integer codigo) {
-		PreparedStatement ps = null;
 		
 		Cliente c = findClienteByCodigo(codigo);
 		
-		
 		try {
-			ps = jdbc.getConexao().prepareStatement("DELETE FROM T20WPS2.tb_cliente c WHERE c.cod_cliente = ?;"
-					+ "DELETE FROM T20WPS2.tb_pf pf WHERE pf.cod_pf = ?;"
-					+ "DELETE FROM T20WPS2.tb_documento_pf dpf WHERE dpf.cod_documento_pf = ?;"
-					+ "DELETE FROM T20WPS2.tb_telefone t WHERE t.cod_pessoa = ?;"
-					+ "DELETE FROM T20WPS2.tb_endereco e WHERE e.cod_pessoa = ?;"
-					+ "DELETE FROM T20WPS2.tb_pessoa p WHERE p.cod_pessoa = ?;");
+			
+			
+			String sql = "DELETE FROM T20WPS2.tb_cliente WHERE cod_cliente = ?";
+			String sql2 = " DELETE FROM T20WPS2.tb_pf WHERE cod_pf = ?";
+			String sql3 = " DELETE FROM T20WPS2.tb_documento_pf WHERE cod_documento_pf = ?";
+			String sql4 = " DELETE FROM T20WPS2.tb_telefone WHERE cod_pessoa = ?";
+			String sql5 = " DELETE FROM T20WPS2.tb_endereco WHERE cod_pessoa = ?";
+			String sql6 = " DELETE FROM T20WPS2.tb_pessoa WHERE cod_pessoa = ?";
+					
+			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
 			
 			ps.setInt(1, codigo);
-			ps.setInt(2, c.getPessoaFisica().getCodPessoa());
-			ps.setInt(3, c.getPessoaFisica().getDocumentoPessoaFisica().getCodDocPf());
-			ps.setInt(4, c.getPessoaFisica().getCodPessoa());
-			ps.setInt(5, c.getPessoaFisica().getCodPessoa());
-			ps.setInt(6, c.getPessoaFisica().getCodPessoa());
+			ps.execute();
 			
-			if(ps.executeUpdate() > 0) {
-				return true;
-			}
-		
+			ps = jdbc.getConexao().prepareStatement(sql2);
+			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
+			ps.execute();
+			ps = jdbc.getConexao().prepareStatement(sql3);
+			ps.setInt(1, c.getPessoaFisica().getDocumentoPessoaFisica().getCodDocPf());
+			ps.execute();
+			ps = jdbc.getConexao().prepareStatement(sql4);
+			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
+			ps.execute();
+			ps = jdbc.getConexao().prepareStatement(sql5);
+			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
+			ps.execute();
+			ps = jdbc.getConexao().prepareStatement(sql6);
+			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
+			ps.execute();
+
+			ps.close();
+			
+			return true;
+			
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}

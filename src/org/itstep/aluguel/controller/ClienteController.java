@@ -30,7 +30,7 @@ public class ClienteController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{codigo}")
+	@Path("{codigo}")
 	public Cliente findClienteByCodigo(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
 
 		ClienteFacade clienteFacade = new ClienteFacade();
@@ -38,15 +38,15 @@ public class ClienteController {
 		return clienteFacade.findClienteByCodigo(codigo);
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/{nome}")
-	public List<Cliente> findClienteByName(@Context HttpHeaders httpHeaders, @PathParam("nome") String nome) {
-
-		ClienteFacade clienteFacade = new ClienteFacade();
-
-		return clienteFacade.findClienteByName(nome);
-	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Path("{nome}")
+//	public List<Cliente> findClienteByName(@Context HttpHeaders httpHeaders, @PathParam("nome") String nome) {
+//
+//		ClienteFacade clienteFacade = new ClienteFacade();
+//
+//		return clienteFacade.findClienteByName(nome);
+//	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -89,19 +89,19 @@ public class ClienteController {
 		//return Response.status(200).entity(result).build();
 	}
 	
-//	@DELETE
-//	@Consumes(MediaType.TEXT_PLAIN)
-//	@Path("/{codigo}")
-//	public Response deleteCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
-//		
-//		ClienteFacade clienteFacade = new ClienteFacade();
-//		
-//		if(clienteFacade.deleteCliente(codigo)) {
-//			return Response.status(200).build();
-//		}else {
-//			return Response.status(500).build();
-//		}
-//	}
+	@DELETE
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Path("/remove/{codigo}")
+	public Response deleteCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
+		
+		ClienteFacade clienteFacade = new ClienteFacade();
+		
+		if(clienteFacade.deleteCliente(codigo)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(500).build();
+		}
+	}
 	
 
 	

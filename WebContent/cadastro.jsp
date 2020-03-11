@@ -18,7 +18,7 @@
 		margin-bottom:10px;
 	}
 	a:link {
-		color: white; 
+		color: black; 
 	}
 	a:visited {
     	color: white;
