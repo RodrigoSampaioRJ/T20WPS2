@@ -30,7 +30,7 @@ public class ClienteController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("{codigo}")
+	@Path("/{codigo}")
 	public Cliente findClienteByCodigo(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
 
 		ClienteFacade clienteFacade = new ClienteFacade();
@@ -40,7 +40,7 @@ public class ClienteController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("search={nome}")
+	@Path("/{nome}")
 	public List<Cliente> findClienteByName(@Context HttpHeaders httpHeaders, @PathParam("nome") String nome) {
 
 		ClienteFacade clienteFacade = new ClienteFacade();
@@ -91,11 +91,16 @@ public class ClienteController {
 	
 //	@DELETE
 //	@Consumes(MediaType.TEXT_PLAIN)
-//	@Path("excluir={codigo}")
+//	@Path("/{codigo}")
 //	public Response deleteCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
 //		
+//		ClienteFacade clienteFacade = new ClienteFacade();
 //		
-//	
+//		if(clienteFacade.deleteCliente(codigo)) {
+//			return Response.status(200).build();
+//		}else {
+//			return Response.status(500).build();
+//		}
 //	}
 	
 

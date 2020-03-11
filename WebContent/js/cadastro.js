@@ -15,7 +15,7 @@ $.ajax({
 		html += "<tbody>";
 		for (var i = 0; i < resultLista.length; i++) {
 
-			html += "<tr>" + resultLista.pessoaFisica.codPessoa 
+			html += "<tr>"
 				+ "<td>" + resultLista[i].pessoaFisica.nome + "</td>"
 				+ "<td>" + resultLista[i].pessoaFisica.email + "</td>"
 				+ "<td>" + "<i class=\"fas fa-trash-alt fa-2x\"></i>" + "</td></a>"

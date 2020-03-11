@@ -5,6 +5,7 @@ import java.util.Date;
 public class DocumentoPessoaFisica {
 	
 	//Atributos da Classe
+	private Integer codDocPf;
 	private String cpf;
 	private String rg;
 	private Date   dtEmissaoRG;
@@ -16,7 +17,8 @@ public class DocumentoPessoaFisica {
 	public DocumentoPessoaFisica() {
 	}
 	
-	public DocumentoPessoaFisica(String cpf, String rg, Date dtEmissaoRG, String orgaoEmissor, String habilitacao) {
+	public DocumentoPessoaFisica(Integer codDocPf, String cpf, String rg, Date dtEmissaoRG, String orgaoEmissor, String habilitacao) {
+		this.codDocPf = codDocPf;
 		this.cpf = cpf;
 		this.rg = rg;
 		this.dtEmissaoRG = dtEmissaoRG;
@@ -25,6 +27,15 @@ public class DocumentoPessoaFisica {
 	}
 	
 	//Getters and Setters
+	
+	public Integer getCodDocPf() {
+		return codDocPf;
+	}
+
+	public void setCodDocPf(Integer codDocPf) {
+		this.codDocPf = codDocPf;
+	}
+	
 	public String getCpf() {
 		return cpf;
 	}
