@@ -63,8 +63,6 @@ public class ClienteController {
 	@Path("/save")
 	public Response addCliente(String data) throws ParseException, SQLException {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		
 		System.out.println(data);
 		GsonBuilder gsb = new GsonBuilder();
 		gsb.setDateFormat("dd/MM/yyyy");	
@@ -73,13 +71,6 @@ public class ClienteController {
 		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
 		
 		ClienteFacade clienteFacade = new ClienteFacade();
-
-		
-		String result = "Nome: " + pf.getNome() + "\n"+
-		"Email: " + pf.getEmail() +"\n" +
-		"Logradouro:" + pf.getEndereco().getLogradouro() +"\n" +
-		"Data Nascimento:" + sdf.format(pf.getDtNascimento())  +"\n" + 
-		"Data de Emissao: " + sdf.format(pf.getDocumentoPessoaFisica().getDtEmissaoRG());
 
 		if(clienteFacade.addCliente(pf)) {
 			return Response.status(200).build();
