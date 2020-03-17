@@ -14,6 +14,9 @@
 
 <style type="text/css">
 
+	#idb{
+		margin: 0 auto;
+	}
 	.form-group.row{
 		margin-bottom:10px;
 	}
@@ -25,7 +28,7 @@
 	}
 	button{
 		padding: 2px;
-		margin-left: 2px;	
+		margin-left: 2px;
 	}
 
 	
@@ -53,12 +56,12 @@
 
 <div class="form-group-row">
 	<div class="col-md-5">
-		<table id="idTbClientes" class="table table-sm table-bordered table-condensed table-hover"></table>
+		<table id="idTbClientes"></table>
 	</div>
 	
 </div>
 
-
+<!-- 	<input type="button" onclick="teste();" value="teste"> -->
 	<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>
 	<script type="text/javascript" src="source/js/isotope.js"></script>
 	<script type="text/javascript" src="source/js/myscript.js"></script>
@@ -69,4 +72,4 @@
 </body>
 </html>
 
-<script type="text/javascript" src="js/cadastro.js"></script>
+<script type="text/javascript" src="js/cadastro1.js"></script>
