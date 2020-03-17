@@ -1,5 +1,6 @@
 package org.itstep.aluguel.facade;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -307,47 +308,29 @@ public class ClienteFacade {
 	
 	public boolean deleteCliente(Integer codigo) {
 		
-		Cliente c = findClienteByCodigo(codigo);
+//		Cliente c = findClienteByCodigo(codigo);
 		
 		try {
 			
-			
-			String sql = "DELETE FROM T20WPS2.tb_cliente WHERE cod_cliente = ?";
-			String sql2 = " DELETE FROM T20WPS2.tb_pf WHERE cod_pf = ?";
-			String sql3 = " DELETE FROM T20WPS2.tb_documento_pf WHERE cod_documento_pf = ?";
-			String sql4 = " DELETE FROM T20WPS2.tb_telefone WHERE cod_pessoa = ?";
-			String sql5 = " DELETE FROM T20WPS2.tb_endereco WHERE cod_pessoa = ?";
-			String sql6 = " DELETE FROM T20WPS2.tb_pessoa WHERE cod_pessoa = ?";
-					
-			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
-			
-			ps.setInt(1, codigo);
-			ps.execute();
-			
-			ps = jdbc.getConexao().prepareStatement(sql2);
-			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
-			ps.execute();
-			ps = jdbc.getConexao().prepareStatement(sql3);
-			ps.setInt(1, c.getPessoaFisica().getDocumentoPessoaFisica().getCodDocPf());
-			ps.execute();
-			ps = jdbc.getConexao().prepareStatement(sql4);
-			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
-			ps.execute();
-			ps = jdbc.getConexao().prepareStatement(sql5);
-			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
-			ps.execute();
-			ps = jdbc.getConexao().prepareStatement(sql6);
-			ps.setInt(1, c.getPessoaFisica().getCodPessoa());
-			ps.execute();
+//			String sql = "EXECUTE T20WPS2.DELETE_CLIENTE(?);";
 
-			ps.close();
+			String sql = "{ call T20WPS2.DELETE_CLIENTE(?) }";
+			
+			CallableStatement cs = jdbc.getConexao().prepareCall(sql); 		
+	//		PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
+			
+			cs.setInt(1, codigo);
+			cs.execute();
+			
+			cs.close();
 			
 			return true;
 			
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
+			return false;
 		}
-		return false;
+		
 
 	}
 

@@ -21,7 +21,7 @@
 		color: black; 
 	}
 	a:visited {
-    	color: white;
+    	color: black;
 	}
 	button{
 		padding: 2px;

@@ -1,5 +1,35 @@
 var baseURL = "http://localhost:9080/AluguelCarros/aluguelRest/cliente/"
 
+$(document).ready(function () {
+
+	$(document).off("click", "#idBtnDelete").on("click", "#idBtnDelete", function () {
+
+		alert('Entrei');
+		var valor = $(this).parent("idExclusao").val();
+		alert(valor);
+
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/delete/",
+			data: "",
+			async: false,
+			cache: false,
+			dataType: 'json',
+			success: function () {
+				alert('Excluido com sucesso!');
+
+			}
+		});
+
+
+	});
+
+});
+
+
+
+
+
 $.ajax({
 	type: "GET",
 	url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/lista",
@@ -22,7 +52,8 @@ $.ajax({
 				+ "<td>" + resultLista[i].pessoaFisica.documentoPessoaFisica.habilitacao + "</td>"
 				+ "<td>" + resultLista[i].pessoaFisica.email + "</td>"
 				+ "<td>" + "<i class=\"fas fa-edit fa-2x\"></i>" + "</td>"
-				+ "<td>" + "<a href="+baseURL+"delete/"+resultLista[i].codCliente+" <b><i class=\"fas fa-trash-alt fa-2x\"></i></b></a>" + "</td>"
+				+ "<td>" + "<a href=\"\"><b id=idBtnDelete" + "><i class=\"fas fa-trash-alt fa-2x\"></i></b></a>" 
+				+ "<input type=\"hidden\" name=\"NomeIdExclusao\" id=\"idExclusao" +"+\" value="+ resultLista[i].codCliente +">" + "</td>"
 				+ "</tr>";
 		}
 
@@ -40,7 +71,7 @@ function findClienteByName() {
 
 	$.ajax({
 		type: "GET",
-		url: baseURL + "search="+nome,
+		url: baseURL + "search=" + nome,
 		data: "",
 		async: false,
 		cache: false,

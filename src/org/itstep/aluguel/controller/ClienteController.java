@@ -40,7 +40,7 @@ public class ClienteController {
 
 //	@GET
 //	@Produces(MediaType.APPLICATION_JSON)
-//	@Path("{nome}")
+//	@Path("/pesquisar/{nome}")
 //	public List<Cliente> findClienteByName(@Context HttpHeaders httpHeaders, @PathParam("nome") String nome) {
 //
 //		ClienteFacade clienteFacade = new ClienteFacade();
@@ -82,7 +82,7 @@ public class ClienteController {
 	
 	@DELETE
 	@Consumes(MediaType.TEXT_PLAIN)
-	@Path("/remove/{codigo}")
+	@Path("/delete/{codigo}")
 	public Response deleteCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
 		
 		ClienteFacade clienteFacade = new ClienteFacade();
