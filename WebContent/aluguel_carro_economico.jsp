@@ -193,7 +193,7 @@
 		<select name="tipoCarro" id="idTipoCarro" class="w-25 p-3" style ="margin: 10px" onchange="buscaValor();"></select>
 		<span name="textoValor"> Valor da diária = </span>
 	    <input type="text"  id="idValorCarro" class="w-25 p-3" style ="margin: 10px" >
-	    <a href="novo_cliente.jsp" target="_self"><input type="button" id="idButtonOk" value="OK" onclick=></a>
+	    <a href="cadastro.jsp" target="_self"><input type="button" id="idButtonOk" value="OK" onclick=></a>
 	    
 	</form>
 	
