@@ -59,7 +59,7 @@ $(document).ready(function () {
 
 		var id = $(this).parent().data('id');
 
-		window.location.href = "novo_cliente.jsp?tipo=editar&id=" + id;
+		window.location.href = "editar_cliente.jsp?tipo=editar&id=" + id;
 
 	});
 

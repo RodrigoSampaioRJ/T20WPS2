@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<html>
 <head>
+
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="source/bootstrap-3.3.6-dist/css/bootstrap.css">
@@ -12,25 +14,17 @@
 
 
 <style type="text/css">
-	.form-group.row {
+
+.form-group.row {
 		margin-bottom: 10px;
-	}
-	
-	h11 {
-		color: red;
-	}
-	
-	#logo {
-		width: 50%;
-		height: 50%;
-	}
-	
-	.panel-heading {
+}
+.panel-heading {
 		font-size: 150%;
-	}
+}
+
 </style>
 
-<title>Novo Cliente</title>
+<title>Editar Cliente</title>
 
 </head>
 <body>
@@ -38,7 +32,7 @@
 	<form class="form-horizontal">
 		<fieldset>
 			<div class="panel panel-primary">
-				<div class="panel-heading">Cadastro de Cliente</div>
+				<div class="panel-heading">Editar Cliente</div>
 
 				<div class="panel-body">
 					<div class="form-group">
@@ -51,17 +45,6 @@
 								<input id="idNome" name="idNome" type="text" placeholder="Nome"
 									class="form-control input-md" required="">
 
-							</div>
-						</div>
-
-
-
-						<!-- Password input-->
-						<div class="form-group row">
-							<label class="col-md-5 control-label" for="idSenha">Senha<h11>*</h11></label>
-							<div class="col-md-2">
-								<input id="idSenha" name="idSenha" type="password"
-									placeholder="Senha" class="form-control input-md" required="">
 							</div>
 						</div>
 
@@ -84,27 +67,6 @@
 							</div>
 						</div>
 
-						<div class="form-group row">
-							<label class="col-md-5 control-label" for="Nome">Orgão
-								Emissor <h11>*</h11>
-							</label>
-							<div class="col-md-2">
-								<input id="idOrgao" name="orgao" placeholder="Emissor"
-									class="form-control input-md" required="" type="text">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-md-5 control-label " for="Nome">Data de
-								Emissão<h11>*</h11>
-							</label>
-							<div class="col-md-2">
-								<input id="idDtEmissao" name="dtemissao"
-									placeholder="DD/MM/AAAA" class="form-control input-md"
-									required="" type="text" maxlength="10"
-									OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-							</div>
-						</div>
 
 						<div class="form-group row">
 							<label class="col-md-5 control-label" for="Nome">Habilitação
@@ -115,30 +77,6 @@
 									placeholder="Apenas números" class="form-control input-md"
 									required="" type="text" maxlength="11" pattern="[0-9]+$">
 							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-md-5 control-label " for="Nome">Nascimento<h11>*</h11></label>
-							<div class="col-md-2">
-								<input id="idDtNasc" name="dtnasc" placeholder="DD/MM/AAAA"
-									class="form-control input-md" required="" type="text"
-									maxlength="10" OnKeyPress="formatar('##/##/####', this)"
-									onBlur="showhide()">
-							</div>
-						</div>
-
-						<!-- Multiple Radios (inline) -->
-						<div class="form-group row">
-							<label class="col-md-5 control-label" for="radios">Sexo <h11>*</h11></label>
-
-							<label required="" class="radio-inline" for="radios-0">
-								<input name="sexo" id="idSexo" value="feminino" type="radio"
-								required> Feminino
-							</label> <label class="radio-inline" for="radios-1"> <input
-								name="sexo" id="idSexo" value="masculino" type="radio">
-								Masculino
-							</label>
-
 						</div>
 
 						<!-- Prepended text-->
@@ -252,7 +190,7 @@
 
 						<div class="row">
 							<div class="col-md-6 control-label">
-								<button type="button" class="btn btn-success" onclick="salvarCliente();">Cadastrar</button>
+								<button type="button" class="btn btn-success" onclick="">Salvar</button>
 							</div>
 
 							<div class="col-md-1 control-label">
@@ -275,8 +213,7 @@
 </body>
 </html>
 
-<script type="text/javascript" src="js/novo_cliente.js"></script>
-
+<script type="text/javascript" src="js/editar_cliente.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(
