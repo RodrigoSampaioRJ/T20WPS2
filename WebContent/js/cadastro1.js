@@ -35,21 +35,31 @@ $(document).ready(function () {
 
 		var id = $(this).parent().data('id');
 
-		$.ajax({
-			type: "DELETE",
-			url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/delete/"+id,
-			data: "",
-			async: false,
-			cache: false,
-			//dataType: 'json',
-			success: function () {
+		if (confirm("Deseja excluir esse registro ?")) {
 
-				
-				alert('Usuario excluido com sucesso!');
-				refresh();
+			$.ajax({
+				type: "DELETE",
+				url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/delete/" + id,
+				data: "",
+				async: false,
+				cache: false,
+				//dataType: 'json',
+				success: function () {
 
-			}
-		});
+
+					alert('Usuario excluido com sucesso!');
+					refresh();
+
+				}
+			});
+		}
+	});
+
+	$('body').on('click', '.btnEditar', function (e) {
+
+		var id = $(this).parent().data('id');
+
+		window.location.href = "novo_cliente.jsp?tipo=editar&id=" + id;
 
 	});
 
@@ -95,12 +105,14 @@ function montarConteudo() {
 
 		$linha.append($('<td>' + dados[i].pessoaFisica.endereco.estado + '</td>'));
 
+
 		var $botaoExcluir = $('<input>').attr({ id: 'idD', type: 'button', name: 'btn1', class: 'btnExcluir far fa-trash-alt fa-2x' });
 
 		$linha.append($botaoExcluir);
 
-		//    var $botaoEditar = $('<input>').attr({id:'idE', type: 'button', name:'btn2', class:'btnEditar far fa-edit fa-2x'});
+		var $botaoEditar = $('<input>').attr({id:'idE', type: 'button', name:'btn2', class:'btnEditar far fa-edit fa-2x'});
 
+		$linha.append($botaoEditar);
 
 		$tbody.append($linha);
 
@@ -110,6 +122,6 @@ function montarConteudo() {
 
 }
 
-function refresh(){
+function refresh() {
 	location.reload(true);
 }
