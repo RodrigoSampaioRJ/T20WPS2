@@ -22,35 +22,31 @@ public class ClienteFacade {
 	JdbcDAOFactory jdbc = new JdbcDAOFactory();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-	public Cliente findClienteByCodigo(Integer codigo){
+	public Cliente findClienteByCodigo(Integer codigo) {
 
 		// Busca no banco de dados o cliente desejado a partir do código
 
 		Cliente c = null;
 
-
 		try {
-			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa, p.senha_pessoa,t.numero,pf.data_nascimento,pf.sexo,dpf.cpf, dpf.data_emissao_rg, dpf.habilitacao, dpf.orgao_emissor_rg, dpf.rg,\r\n" + 
-					"e.logradouro, e.numero_endereco, e.complemento, e.estado, e.cidade, e.bairro,e.cep\r\n" + 
-					"FROM t20wps2.tb_cliente c \r\n" + 
-					"JOIN t20wps2.tb_pf pf ON c.cod_pf = pf.cod_pf \r\n" + 
-					"JOIN t20wps2.tb_pessoa p ON p.cod_pessoa = pf.cod_pessoa\r\n" + 
-					"JOIN t20wps2.tb_endereco e ON p.cod_pessoa = e.cod_pessoa\r\n" + 
-					"JOIN t20wps2.tb_telefone t ON p.cod_pessoa = t.cod_pessoa\r\n" + 
-					"JOIN T20WPS2.tb_documento_pf dpf ON pf.cod_documento_pf = dpf.cod_documento_pf\r\n" + 
-					"WHERE cod_cliente = ?";
-			
+			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa, p.senha_pessoa,t.numero,pf.data_nascimento,pf.sexo,dpf.cpf, dpf.data_emissao_rg, dpf.habilitacao, dpf.orgao_emissor_rg, dpf.rg,\r\n"
+					+ "e.logradouro, e.numero_endereco, e.complemento, e.estado, e.cidade, e.bairro,e.cep\r\n"
+					+ "FROM t20wps2.tb_cliente c \r\n" + "JOIN t20wps2.tb_pf pf ON c.cod_pf = pf.cod_pf \r\n"
+					+ "JOIN t20wps2.tb_pessoa p ON p.cod_pessoa = pf.cod_pessoa\r\n"
+					+ "JOIN t20wps2.tb_endereco e ON p.cod_pessoa = e.cod_pessoa\r\n"
+					+ "JOIN t20wps2.tb_telefone t ON p.cod_pessoa = t.cod_pessoa\r\n"
+					+ "JOIN T20WPS2.tb_documento_pf dpf ON pf.cod_documento_pf = dpf.cod_documento_pf\r\n"
+					+ "WHERE cod_cliente = ?";
+
 			PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
-			
+
 			ps.setInt(1, codigo);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
-			
-			
+
 			rs = ps.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				Endereco endereco = new Endereco(rs.getString("LOGRADOURO"), rs.getInt("NUMERO_ENDERECO"),
 						rs.getString("COMPLEMENTO"), rs.getString("BAIRRO"), rs.getString("CIDADE"),
 						rs.getString("ESTADO"), rs.getInt("CEP"));
@@ -61,21 +57,22 @@ public class ClienteFacade {
 
 				Date dtEmissaoRG = rs.getDate("DATA_EMISSAO_RG");
 
-				DocumentoPessoaFisica documentoPessoaFisica = new DocumentoPessoaFisica(rs.getInt("COD_DOCUMENTO_PF"),rs.getString("CPF"),
-						rs.getString("RG"), dtEmissaoRG, rs.getString("ORGAO_EMISSOR_RG"), rs.getString("HABILITACAO"));
+				DocumentoPessoaFisica documentoPessoaFisica = new DocumentoPessoaFisica(rs.getInt("COD_DOCUMENTO_PF"),
+						rs.getString("CPF"), rs.getString("RG"), dtEmissaoRG, rs.getString("ORGAO_EMISSOR_RG"),
+						rs.getString("HABILITACAO"));
 
-				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"),rs.getString("NOME_PESSOA"), rs.getString("EMAIL_PESSOA"),
-						rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento, rs.getString("SEXO"),
-						documentoPessoaFisica);
+				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"), rs.getString("NOME_PESSOA"),
+						rs.getString("EMAIL_PESSOA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
+						rs.getString("SEXO"), documentoPessoaFisica);
 
-				c = new Cliente(rs.getInt("COD_CLIENTE"),pessoaFisica);
-				
+				c = new Cliente(rs.getInt("COD_CLIENTE"), pessoaFisica);
+
 				return c;
 			}
 			ps.close();
 			rs.close();
-			
-		}catch(SQLException e ) {
+
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		return c;
@@ -112,16 +109,17 @@ public class ClienteFacade {
 
 				Date dtEmissaoRG = rs.getDate("DATA_EMISSAO_RG");
 
-				DocumentoPessoaFisica documentoPessoaFisica = new DocumentoPessoaFisica(rs.getInt("COD_DOCUMENTO_PF"),rs.getString("CPF"),
-						rs.getString("RG"), dtEmissaoRG, rs.getString("ORGAO_EMISSOR_RG"), rs.getString("HABILITACAO"));
+				DocumentoPessoaFisica documentoPessoaFisica = new DocumentoPessoaFisica(rs.getInt("COD_DOCUMENTO_PF"),
+						rs.getString("CPF"), rs.getString("RG"), dtEmissaoRG, rs.getString("ORGAO_EMISSOR_RG"),
+						rs.getString("HABILITACAO"));
 
-				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"),rs.getString("NOME_PESSOA"), rs.getString("EMAIL_PESSOA"),
-						rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento, rs.getString("SEXO"),
-						documentoPessoaFisica);
+				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"), rs.getString("NOME_PESSOA"),
+						rs.getString("EMAIL_PESSOA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
+						rs.getString("SEXO"), documentoPessoaFisica);
 
-				Cliente cliente = new Cliente(rs.getInt("COD_CLIENTE"),pessoaFisica);
-				
-				if(cliente.getPessoaFisica().getNome().equalsIgnoreCase(nome)) {
+				Cliente cliente = new Cliente(rs.getInt("COD_CLIENTE"), pessoaFisica);
+
+				if (cliente.getPessoaFisica().getNome().equalsIgnoreCase(nome)) {
 					list.add(cliente);
 				}
 				rs.close();
@@ -133,7 +131,6 @@ public class ClienteFacade {
 		}
 		return list;
 	}
-	
 
 	public List<Cliente> findAllClientes() {
 
@@ -166,14 +163,15 @@ public class ClienteFacade {
 
 				Date dtEmissaoRG = rs.getDate("DATA_EMISSAO_RG");
 
-				DocumentoPessoaFisica documentoPessoaFisica = new DocumentoPessoaFisica(rs.getInt("COD_DOCUMENTO_PF"),rs.getString("CPF"),
-						rs.getString("RG"), dtEmissaoRG, rs.getString("ORGAO_EMISSOR_RG"), rs.getString("HABILITACAO"));
+				DocumentoPessoaFisica documentoPessoaFisica = new DocumentoPessoaFisica(rs.getInt("COD_DOCUMENTO_PF"),
+						rs.getString("CPF"), rs.getString("RG"), dtEmissaoRG, rs.getString("ORGAO_EMISSOR_RG"),
+						rs.getString("HABILITACAO"));
 
-				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"),rs.getString("NOME_PESSOA"), rs.getString("EMAIL_PESSOA"),
-						rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento, rs.getString("SEXO"),
-						documentoPessoaFisica);
+				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"), rs.getString("NOME_PESSOA"),
+						rs.getString("EMAIL_PESSOA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
+						rs.getString("SEXO"), documentoPessoaFisica);
 
-				Cliente cliente = new Cliente(rs.getInt("COD_CLIENTE"),pessoaFisica);
+				Cliente cliente = new Cliente(rs.getInt("COD_CLIENTE"), pessoaFisica);
 
 				list.add(cliente);
 
@@ -191,7 +189,7 @@ public class ClienteFacade {
 
 		Cliente cliente = new Cliente();
 		cliente.setDtCadastro(new Date());
-		
+
 		int cod_doc_pf_gerado = 0;
 		int cod_pf_gerado = 0;
 		int cod_pessoa_gerado = 0;
@@ -227,9 +225,11 @@ public class ClienteFacade {
 			while (rs.next()) {
 				cod_doc_pf_gerado = rs.getInt("CURRVAL");
 			}
+
 			ps = null;
 			psCod = null;
 			rs = null;
+
 			// INSERT PESSOA
 			ps = jdbc.getConexao().prepareStatement(sqlInsertPessoa);
 			psCod = jdbc.getConexao().prepareStatement("SELECT t20wps2.sq_pessoa.currval from dual");
@@ -239,12 +239,15 @@ public class ClienteFacade {
 			ps.execute();
 
 			rs = psCod.executeQuery();
+
 			while (rs.next()) {
 				cod_pessoa_gerado = rs.getInt("CURRVAL");
 			}
+
 			ps = null;
 			psCod = null;
 			rs = null;
+
 			// INSERT PF
 
 			ps = jdbc.getConexao().prepareStatement(sqlInsertPessoaF);
@@ -268,10 +271,9 @@ public class ClienteFacade {
 			ps.setInt(1, cod_pf_gerado);
 			ps.setString(2, null);
 			ps.setDate(3, new java.sql.Date(cliente.getDtCadastro().getTime()));
+
 			ps.execute();
 
-			
-			
 			ps = null;
 
 			// INSERT TELEFONE
@@ -279,8 +281,11 @@ public class ClienteFacade {
 			ps = jdbc.getConexao().prepareStatement(sqlInsertTel);
 			ps.setLong(1, Long.parseLong(pf.getTelefone().getNumero()));
 			ps.setInt(2, cod_pessoa_gerado);
+
 			ps.execute();
+
 			ps = null;
+
 			// INSERT ENDERECO
 			ps = jdbc.getConexao().prepareStatement(sqlInsertEndereco);
 			ps.setString(1, pf.getEndereco().getLogradouro());
@@ -293,45 +298,78 @@ public class ClienteFacade {
 			ps.setInt(8, cod_pessoa_gerado);
 
 			ps.execute();
-			
 
 			ps.close();
+
 			psCod.close();
+
 			return true;
 		} catch (SQLException e) {
 
+			System.out.println(e.getMessage());
+
+			return false;
+		}
+
+	}
+
+	public boolean deleteCliente(Integer codigo) {
+
+		try {
+
+			String sql = "{ call T20WPS2.DELETE_CLIENTE(?) }";
+
+			CallableStatement cs = jdbc.getConexao().prepareCall(sql);
+
+			cs.setInt(1, codigo);
+
+			cs.execute();
+
+			cs.close();
+
+			return true;
+
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 
 	}
-	
-	public boolean deleteCliente(Integer codigo) {
-		
-//		Cliente c = findClienteByCodigo(codigo);
-		
-		try {
-			
-//			String sql = "EXECUTE T20WPS2.DELETE_CLIENTE(?);";
 
-			String sql = "{ call T20WPS2.DELETE_CLIENTE(?) }";
-			
-			CallableStatement cs = jdbc.getConexao().prepareCall(sql); 		
-	//		PreparedStatement ps = jdbc.getConexao().prepareStatement(sql);
-			
+	public boolean updateCliente(PessoaFisica pf, Integer codigo) {
+
+		try {
+
+			String sql = "{ call T20WPS2.UPDATE_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
+
+			CallableStatement cs = jdbc.getConexao().prepareCall(sql);
+
 			cs.setInt(1, codigo);
+			cs.setString(2, pf.getNome());
+			cs.setString(3, pf.getEmail());
+			cs.setString(4, pf.getEndereco().getLogradouro());
+			cs.setInt(5, pf.getEndereco().getNumero());
+			cs.setString(6, pf.getEndereco().getComplemento());
+			cs.setString(7, pf.getEndereco().getBairro());
+			cs.setString(8, pf.getEndereco().getEstado());
+			cs.setString(9, pf.getEndereco().getCidade());
+			cs.setInt(10, pf.getEndereco().getCep());
+			cs.setLong(11, Long.parseLong(pf.getTelefone().getNumero()));
+			cs.setString(12, pf.getDocumentoPessoaFisica().getCpf());
+			cs.setString(13, pf.getDocumentoPessoaFisica().getRg());
+			cs.setString(14, pf.getDocumentoPessoaFisica().getHabilitacao());
+
 			cs.execute();
-			
+
 			cs.close();
-			
+
 			return true;
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 		
-
 	}
 
 }

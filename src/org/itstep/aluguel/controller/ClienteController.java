@@ -2,13 +2,13 @@ package org.itstep.aluguel.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,7 +34,9 @@ public class ClienteController {
 	public Cliente findClienteByCodigo(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo) {
 
 		ClienteFacade clienteFacade = new ClienteFacade();
-
+		
+		clienteFacade.findClienteByCodigo(codigo);
+		
 		return clienteFacade.findClienteByCodigo(codigo);
 	}
 
@@ -77,7 +79,7 @@ public class ClienteController {
 		}else {
 			return Response.status(500).build();
 		}
-		//return Response.status(200).entity(result).build();
+		
 	}
 	
 	@DELETE
@@ -92,6 +94,32 @@ public class ClienteController {
 		}else {
 			return Response.status(500).build();
 		}
+	}
+	
+	@PUT
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Path("/update/{codigo}")
+	public Response updateCliente(@Context HttpHeaders httpHeaders, @PathParam("codigo") Integer codigo, String data) {
+		
+		ClienteFacade clienteFacade = new ClienteFacade();
+		
+		
+		System.out.println(data);
+		GsonBuilder gsb = new GsonBuilder();
+		gsb.setDateFormat("dd/MM/yyyy");	
+		gs = gsb.create();	
+		
+		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
+		System.out.println("Nome: " + pf.getNome() + "  Habilitacao: " + pf.getDocumentoPessoaFisica().getHabilitacao());
+		
+		if(clienteFacade.updateCliente(pf, codigo)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(500).build();
+		}
+		
+		
+		
 	}
 	
 

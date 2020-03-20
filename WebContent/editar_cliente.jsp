@@ -16,10 +16,13 @@
 <style type="text/css">
 
 .form-group.row {
-		margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 .panel-heading {
-		font-size: 150%;
+	font-size: 150%;
+}
+h11 {
+	color: red;
 }
 
 </style>
@@ -190,7 +193,7 @@
 
 						<div class="row">
 							<div class="col-md-6 control-label">
-								<button type="button" class="btn btn-success" onclick="">Salvar</button>
+								<button type="button" class="btn btn-success" onclick="salvarCliente();">Salvar</button>
 							</div>
 
 							<div class="col-md-1 control-label">

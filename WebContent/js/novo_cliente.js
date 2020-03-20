@@ -91,7 +91,7 @@ function salvarCliente() {
             window.location.href = "cadastro.jsp";
         },
         error: function () {
-            alert("error");
+            alert("Erro ao cadastrar cliente!");
         }
 
 

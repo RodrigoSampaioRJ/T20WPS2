@@ -1,5 +1,5 @@
 var baseURL = "http://localhost:9080/AluguelCarros/aluguelRest/cliente/"
-
+var idCliente;
 
 $(document).ready(function () {
 
@@ -15,8 +15,9 @@ $(document).ready(function () {
 
     console.log(parametros);
 
-    if(parametros.tipo == "editar"){
+    if (parametros.tipo == "editar") {
 
+        idCliente = parametros.id;
         findClienteById(parametros.id);
 
     }
@@ -25,14 +26,14 @@ $(document).ready(function () {
 
 function findClienteById(id) {
 
-	$.ajax({
-		type: "GET",
-		url: baseURL + id,
-		data: "",
-		async: false,
-		cache: false,
-		dataType: 'json',
-		success: function(retornoCliente) {
+    $.ajax({
+        type: "GET",
+        url: baseURL + id,
+        data: "",
+        async: false,
+        cache: false,
+        dataType: 'json',
+        success: function (retornoCliente) {
 
             $('#idNome').val(retornoCliente.pessoaFisica.nome);
             $('#idCpf').val(retornoCliente.pessoaFisica.documentoPessoaFisica.cpf);
@@ -50,26 +51,56 @@ function findClienteById(id) {
             $("#idNumero").val(retornoCliente.pessoaFisica.endereco.numero);
             $("#idRua").val(retornoCliente.pessoaFisica.endereco.logradouro);
             $("#idUf").val(retornoCliente.pessoaFisica.endereco.estado)
-            // var nome= $('#idNome').val();
-// var senha= $('#idSenha').val();
-// var cpf= $('#idCpf').val();
-// var dtNascimento= $('#idNascimento').val();
-// var  sexo= $('#idSexo').val();
-// var telefone= $("#idTelefone1").val();
-// var telefone2= $("#idTelefone2").val();
-// var email= $("#idEmail").val();
-// var cep= $("#idCep").val();
-// var logradouro= $("#idRua").val();
-// var numero= $("#idNumero").val();
-// var bairro= $("#idBairro").val();
-// var complemento= $("#idComplemento").val();
-// var cidade= $("#idCidade").val();
-// var uf= $("#idUf").val();
-// var habilitacao= $("#idHabilitacao").val();
-// var rg= $("#idRg").val();
-// var orgaoEmissor= $("#idOrgao").val();
-// var dtEmissao= $("#idDtEmissao").val();
-		}
+            $("#idComplemento").val(retornoCliente.pessoaFisica.endereco.complemento);
 
-	});
+        }
+
+    });
+}
+
+function salvarCliente() {
+
+
+    var tel = $("#idTelefone1").val().replace(" ", "").replace("-", "");
+
+    var json = {
+        nome: $('#idNome').val(),
+        email: $("#idEmail").val(),
+        endereco: {
+            logradouro: $("#idRua").val(),
+            numero: $("#idNumero").val(),
+            complemento: $("#idComplemento").val(),
+            bairro: $("#idBairro").val(),
+            cidade: $("#idCidade").val(),
+            uf: $("#idUf").val(),
+            cep: $("#idCep").val()
+        },
+        telefone: {
+            numero: tel
+        },
+        documentoPessoaFisica: {
+            cpf: $('#idCpf').val(),
+            rg: $("#idRg").val(),
+            habilitacao: $("#idHabilitacao").val()
+        }
+    }
+    if (confirm("Deseja atualizar esse registro?")) {
+        $.ajax({
+            type: "PUT",
+            url: baseURL + "update/" + idCliente,
+            data: JSON.stringify(json),
+            async: false,
+            cache: false,
+            contentType: "text/plain",
+            dataType: 'text',
+            success: function () {
+
+                window.location.href = "cadastro.jsp";
+            },
+            error: function () {
+                alert("Erro ao editar cliente!");
+            }
+
+        });
+    }
 }
