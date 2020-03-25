@@ -74,7 +74,7 @@ function montarThead() {
 
 	var $thead = $('<thead>');
 
-	var $tr = $('<tr>').append($('<th>#</th>')).append($('<th>Nome</th>')).append($('<th>CPF</th>')).append($('<th>Habilitacao</th>')).append($('<th>Telefone</th>')).append($('<th>Cidade</th>')).append($('<th>Estado</th>')).append($('<th><i class="fas fa-eraser"></i></th>')).append($('<th><i class="fas fa-pen-square"></i></th>'));
+	var $tr = $('<tr>').append($('<th>#</th>')).append($('<th>Nome</th>')).append($('<th>E-mail</th>')).append($('<th>CPF</th>')).append($('<th>Habilitacao</th>')).append($('<th>Telefone</th>')).append($('<th>Cidade</th>')).append($('<th>Estado</th>')).append($('<th><i class="fas fa-eraser"></i></th>')).append($('<th><i class="fas fa-pen-square"></i></th>'));
 
 	$thead.html($tr);
 
@@ -94,6 +94,8 @@ function montarConteudo() {
 		$linha.append($('<td>' + (i + 1) + '</td>'));
 
 		$linha.append($('<td>' + dados[i].pessoaFisica.nome + '</td>'));
+		
+		$linha.append($('<td>' + dados[i].pessoaFisica.email + '</td>'));
 
 		$linha.append($('<td>' + dados[i].pessoaFisica.documentoPessoaFisica.cpf + '</td>'));
 

@@ -69,11 +69,12 @@ button {
 
 		<div class="form-group-row">
 			<div class="col-md-5">
-				<table id="idTbClientes"></table>
+				<table id="idTbClientes" class="table table-striped table-bordered table-condensed table-hover"></table>
 			</div>
 
 		</div>
 
+		
 		<!-- 	<input type="button" onclick="teste();" value="teste"> -->
 		<script type="text/javascript"
 			src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>
@@ -86,4 +87,4 @@ button {
 </body>
 </html>
 
-<script type="text/javascript" src="js/cadastro1.js"></script>
+<script type="text/javascript" src="js/cadastro.js"></script>

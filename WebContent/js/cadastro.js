@@ -1,69 +1,81 @@
 var baseURL = "http://localhost:9080/AluguelCarros/aluguelRest/cliente/"
 
 $(document).ready(function () {
+	
+	listarClientes();
+	
+	$('body').on('click', 'a[id^=idBtnDelete_]', function(){
+		
+		var id = $(this).attr("id").substring(12);
+		//alert('Entrei exclusao ='+ id);
+		
+		if (confirm("Deseja excluir esse registro ?")) {
 
-	$(document).off("click", "#idBtnDelete").on("click", "#idBtnDelete", function () {
+			$.ajax({
+				type: "DELETE",
+				url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/delete/" + id,
+				data: "",
+				async: false,
+				cache: false,
+				success: function () {
 
-		alert('Entrei');
-		var valor = $(this).parent("idExclusao").val();
-		alert(valor);
+					alert('Usuario excluido com sucesso!');
+					//refresh();
+				}
+			});
+		}
+	});
+	
+	$('body').on('click', 'a[id^=idBtnEditar_]', function () {
 
-		$.ajax({
-			type: "GET",
-			url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/delete/",
-			data: "",
-			async: false,
-			cache: false,
-			dataType: 'json',
-			success: function () {
-				alert('Excluido com sucesso!');
-
-			}
-		});
-
-
+		var id = $(this).attr("id").substring(12);
+		
+		window.location.href = "aluguel_carro_economico.jsp";
+		
+		//window.location.assign = "editar_cliente.jsp";
+		
 	});
 
+	
 });
 
 
 
+function listarClientes(){
 
-
-$.ajax({
-	type: "GET",
-	url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/lista",
-	data: "",
-	async: false,
-	cache: false,
-	dataType: 'json',
-	success: function (resultLista) {
-
-		var html = "<table id=idTbClientesJ class=table table-striped table-bordered table-condensed table-hover>"
-
-		html += "<thead> <tr><th>Nome</th><th>Telefone</th><th>CPF</th><th>Habilitacao</th><th>Email</th><th>Editar</th><th>Excluir</th></tr></thead>";
-		html += "<tbody>";
-		for (var i = 0; i < resultLista.length; i++) {
-
-			html += "<tr>"
-				+ "<td>" + resultLista[i].pessoaFisica.nome + "</td>"
-				+ "<td>" + resultLista[i].pessoaFisica.telefone.numero + "</td>"
-				+ "<td>" + resultLista[i].pessoaFisica.documentoPessoaFisica.cpf + "</td>"
-				+ "<td>" + resultLista[i].pessoaFisica.documentoPessoaFisica.habilitacao + "</td>"
-				+ "<td>" + resultLista[i].pessoaFisica.email + "</td>"
-				+ "<td>" + "<i class=\"fas fa-edit fa-2x\"></i>" + "</td>"
-				+ "<td>" + "<a href=\"\"><b id=idBtnDelete" + "><i class=\"fas fa-trash-alt fa-2x\"></i></b></a>" 
-				+ "<input type=\"hidden\" name=\"NomeIdExclusao\" id=\"idExclusao" +"+\" value="+ resultLista[i].codCliente +">" + "</td>"
-				+ "</tr>";
+	$.ajax({
+		type: "GET",
+		url: "http://localhost:9080/AluguelCarros/aluguelRest/cliente/lista",
+		data: "",
+		async: false,
+		cache: false,
+		dataType: 'json',
+		success: function (resultLista) {
+	
+			var html = "<table id=idTbClientesJ class=table table-striped table-bordered table-condensed table-hover>"
+	
+			html += "<thead> <tr><th>Nome</th><th>Telefone</th><th>CPF</th><th>Habilitacao</th><th>Email</th><th>Editar</th><th>Excluir</th></tr></thead>";
+			html += "<tbody>";
+			for (var i = 0; i < resultLista.length; i++) {
+	
+				html += "<tr>"
+					+ "<td>" + resultLista[i].pessoaFisica.nome + "</td>"
+					+ "<td>" + resultLista[i].pessoaFisica.telefone.numero + "</td>"
+					+ "<td>" + resultLista[i].pessoaFisica.documentoPessoaFisica.cpf + "</td>"
+					+ "<td>" + resultLista[i].pessoaFisica.documentoPessoaFisica.habilitacao + "</td>"
+					+ "<td>" + resultLista[i].pessoaFisica.email + "</td>"
+					+ "<td>" + "<a id=idBtnEditar_"+ resultLista[i].codCliente +" href=editar_cliente.jsp?tipo=editar&id="+resultLista[i].codCliente+"><b><i class=\"fas fa-edit fa-2x\"></i></b></a>" + "</td>"
+					+ "<td>" + "<a id=idBtnDelete_"+ resultLista[i].codCliente +" href=\"\"><b><i class=\"fas fa-trash-alt fa-2x\"></i></b></a>" + "</td>"
+					+ "</tr>";
+			};
+	
+			html += "</tbody>";
+	
+			$("#idTbClientes").html(html);
+	
 		}
-
-
-		html += "</tbody>";
-
-		$("#idTbClientes").html(html);
-
-	}
-});
+	});
+}
 
 function findClienteByName() {
 
@@ -98,11 +110,5 @@ function findClienteByName() {
 			$("#idTbClientes").html(html);
 
 		}
-
-
-
-
 	});
 }
-
-

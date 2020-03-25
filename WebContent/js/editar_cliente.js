@@ -4,10 +4,10 @@ var idCliente;
 $(document).ready(function () {
 
     function queryObj() {
-        var result = {}, keyValuePairs = location.search.slice(1).split("&");
-        keyValuePairs.forEach(function (keyValuePair) {
-            keyValuePair = keyValuePair.split('=');
-            result[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(keyValuePair[1]) || '';
+        var result = {}, chaveValorP = location.search.slice(1).split("&");
+        chaveValorP.forEach(function (chaveValor) {
+        	chaveValor = chaveValor.split('=');
+            result[decodeURIComponent(chaveValor[0])] = decodeURIComponent(chaveValor[1]) || '';
         });
         return result;
     }
