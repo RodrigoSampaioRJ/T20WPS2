@@ -7,19 +7,19 @@ public class Carro {
 	private Integer codCarro;
 	private String fabricante;
 	private String modelo;
-	private String ano;
+	private int ano;
 	private String cor;
 	private String chassi;
 	private String placa;
 	private CategoriaCarro categoria;
-	private TabelaPreco tbPreco;
+	private String responsavel;
 	private Double valor;
 	
 	
 	public Carro() {
 	}
-	public Carro(Integer codCarro, String fabricante, String modelo, String ano, String cor, String chassi,
-			String placa, Double valor) {
+	public Carro(Integer codCarro, String fabricante, String modelo, int ano, String cor, String chassi,
+			String placa, String responsavel, Double valor) {
 
 		this.codCarro = codCarro;
 		this.fabricante = fabricante;
@@ -28,7 +28,9 @@ public class Carro {
 		this.cor = cor;
 		this.chassi = chassi;
 		this.placa = placa;
+		this.responsavel= responsavel;
 		this.valor = valor;
+		
 	}
 	//Getters and Setters
 	public String getFabricante() {
@@ -48,6 +50,14 @@ public class Carro {
 
 	
 	
+	public String getResponsavel() {
+		return responsavel;
+	}
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
+	
+	
 	public String getModelo() {
 		return modelo;
 	}
@@ -64,10 +74,10 @@ public class Carro {
 	
 	
 	
-	public String getAno() {
+	public int getAno() {
 		return ano;
 	}
-	public void setAno(String ano) {
+	public void setAno(int ano) {
 		this.ano = ano;
 	}
 	
@@ -95,13 +105,6 @@ public class Carro {
 		this.categoria = categoria;
 	}
 	
-	
-	public TabelaPreco getTbPreco() {
-		return tbPreco;
-	}
-	public void setTbPreco(TabelaPreco tbPreco) {
-		this.tbPreco = tbPreco;
-	}
 	
 	public Double getValor() {
 		return valor;

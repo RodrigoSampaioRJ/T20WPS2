@@ -23,23 +23,6 @@ var baseURL = "http://localhost:9080/AluguelCarros/aluguelRest/cliente/"
 
 $(document).ready(function () {
 
-    function queryObj() {
-        var result = {}, keyValuePairs = location.search.slice(1).split("&");
-        keyValuePairs.forEach(function (keyValuePair) {
-            keyValuePair = keyValuePair.split('=');
-            result[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(keyValuePair[1]) || '';
-        });
-        return result;
-    }
-    var parametros = queryObj();
-
-    console.log(parametros);
-
-    if(parametros.tipo == "editar"){
-
-        findClienteById(parametros.id);
-
-    }
 
 })
 
@@ -51,6 +34,7 @@ function salvarCliente() {
     var json = {
         nome: $('#idNome').val(),
         email: $("#idEmail").val(),
+        prova: $('#idProva').val(),
         senha: $('#idSenha').val(),
         endereco: {
             logradouro: $("#idRua").val(),

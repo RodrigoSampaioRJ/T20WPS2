@@ -65,7 +65,6 @@ public class ClienteController {
 	@Path("/save")
 	public Response addCliente(String data) throws ParseException, SQLException {
 		
-		System.out.println(data);
 		GsonBuilder gsb = new GsonBuilder();
 		gsb.setDateFormat("dd/MM/yyyy");	
 		gs = gsb.create();	
@@ -73,7 +72,7 @@ public class ClienteController {
 		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
 		
 		ClienteFacade clienteFacade = new ClienteFacade();
-
+		
 		if(clienteFacade.addCliente(pf)) {
 			return Response.status(200).build();
 		}else {
@@ -103,22 +102,17 @@ public class ClienteController {
 		
 		ClienteFacade clienteFacade = new ClienteFacade();
 		
-		
-		System.out.println(data);
 		GsonBuilder gsb = new GsonBuilder();
 		gsb.setDateFormat("dd/MM/yyyy");	
 		gs = gsb.create();	
 		
 		PessoaFisica pf = gs.fromJson(data, PessoaFisica.class); 
-		System.out.println("Nome: " + pf.getNome() + "  Habilitacao: " + pf.getDocumentoPessoaFisica().getHabilitacao());
 		
 		if(clienteFacade.updateCliente(pf, codigo)) {
 			return Response.status(200).build();
 		}else {
 			return Response.status(500).build();
 		}
-		
-		
 		
 	}
 	

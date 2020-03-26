@@ -8,6 +8,7 @@ public abstract class Pessoa {
     private Integer  codPessoa;
 	private String   nome;
 	private String   email;
+	private String 	 prova;
 	private String   senha;
 	private Endereco endereco;
 	private Telefone telefone;
@@ -16,10 +17,11 @@ public abstract class Pessoa {
 	public Pessoa() {
 	}
 	
-	public Pessoa(Integer codPessoa, String nome, String email,String senha, Endereco endereco, Telefone telefone) {
+	public Pessoa(Integer codPessoa, String nome, String email,String prova, String senha, Endereco endereco, Telefone telefone) {
 		this.codPessoa = codPessoa;
 		this.nome = nome;
 		this.email = email;
+		this.prova = prova;
 		this.senha = senha;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -37,6 +39,15 @@ public abstract class Pessoa {
 	}
 	public void setCodPessoa(Integer codPessoa) {
 		this.codPessoa = codPessoa;
+	}
+	
+
+	public String getProva() {
+		return prova;
+	}
+
+	public void setProva(String prova) {
+		this.prova = prova;
 	}
 	
 

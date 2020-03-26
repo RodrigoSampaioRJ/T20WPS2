@@ -1,6 +1,37 @@
 $(document).ready(function() {
 	
 
+	$('body').on('click', 'a[id^=idBtnDelete_]', function(){
+		
+		var id = $(this).attr("id").substring(12);
+		//alert('Entrei exclusao ='+ id);
+		
+		if (confirm("Deseja excluir esse registro ?")) {
+
+			$.ajax({
+				type: "DELETE",
+				url: "http://localhost:9080/AluguelCarros/aluguelRest/carro/delete/" + id,
+				data: "",
+				async: false,
+				cache: false,
+				success: function () {
+
+					alert('Carro excluído com sucesso!');
+					//refresh();
+				}
+			});
+		}
+	});
+	
+	$('body').on('click', 'a[id^=idBtnEditar_]', function () {
+
+		var id = $(this).attr("id").substring(12);
+		
+		window.location.href = "aluguel_carro_economico.jsp";
+		
+		
+		
+	});
 
 	
 });
@@ -28,7 +59,7 @@ $.ajax({
 
 		html += " </select> ";
 
-		$("#idTipoCarro").html(html);
+		$("#idCbxCarro").html(html);
 		
 	}
 });
@@ -44,13 +75,19 @@ $.ajax({
 
 			var html = "<table id=idTbCarroJ class=table table-striped table-bordered table-condensed table-hover>"
 			
-			html += "<thead> <tr><th>Marca</th><th>Modelo</th></tr></thead>";
+			html += "<thead> <tr><th>Marca</th><th>Modelo</th><th>Cor</th><th>Ano</th><th>Chassi</th><th>Placa</th><th>Editar</th><th>Excluir</th></tr></thead>";
             html += "<tbody>";
 			for(var i = 0; i < resultLista.length; i++) {
 
 				html += "<tr>"
 				+ "<td>" + resultLista[i].fabricante + "</td>"
-				+  "<td>" + resultLista[i].modelo + "</td>" 
+				+ "<td>" + resultLista[i].modelo + "</td>" 
+				+ "<td>" + resultLista[i].cor + "</td>" 
+				+ "<td>" + resultLista[i].ano + "</td>" 
+				+ "<td>" + resultLista[i].chassi + "</td>" 
+				+ "<td>" + resultLista[i].placa + "</td>" 
+				+ "<td>" + "<a id=idBtnEditar_"+ resultLista[i].codCarro +" href=editar_carro.jsp?tipo=editar&id="+resultLista[i].codCarro+"><b><i class=\"fas fa-edit fa-2x\"></i></b></a>" + "</td>"
+				+ "<td>" + "<a id=idBtnDelete_"+ resultLista[i].codCarro +" href=\"\"><b><i class=\"fas fa-trash-alt fa-2x\"></i></b></a>" + "</td>"
 				+"</tr>";	
 			}
         

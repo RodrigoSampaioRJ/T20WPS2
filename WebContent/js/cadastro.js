@@ -54,7 +54,7 @@ function listarClientes(){
 	
 			var html = "<table id=idTbClientesJ class=table table-striped table-bordered table-condensed table-hover>"
 	
-			html += "<thead> <tr><th>Nome</th><th>Telefone</th><th>CPF</th><th>Habilitacao</th><th>Email</th><th>Editar</th><th>Excluir</th></tr></thead>";
+			html += "<thead> <tr><th>Nome</th><th>Telefone</th><th>CPF</th><th>Habilitacao</th><th>Email</th><th>Prova</th><th>Editar</th><th>Excluir</th></tr></thead>";
 			html += "<tbody>";
 			for (var i = 0; i < resultLista.length; i++) {
 	
@@ -64,6 +64,7 @@ function listarClientes(){
 					+ "<td>" + resultLista[i].pessoaFisica.documentoPessoaFisica.cpf + "</td>"
 					+ "<td>" + resultLista[i].pessoaFisica.documentoPessoaFisica.habilitacao + "</td>"
 					+ "<td>" + resultLista[i].pessoaFisica.email + "</td>"
+					+ "<td>" + resultLista[i].pessoaFisica.prova + "</td>"
 					+ "<td>" + "<a id=idBtnEditar_"+ resultLista[i].codCliente +" href=editar_cliente.jsp?tipo=editar&id="+resultLista[i].codCliente+"><b><i class=\"fas fa-edit fa-2x\"></i></b></a>" + "</td>"
 					+ "<td>" + "<a id=idBtnDelete_"+ resultLista[i].codCliente +" href=\"\"><b><i class=\"fas fa-trash-alt fa-2x\"></i></b></a>" + "</td>"
 					+ "</tr>";

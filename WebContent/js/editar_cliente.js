@@ -42,6 +42,7 @@ function findClienteById(id) {
             $('#idDtNasc').val(data);
             $("#idTelefone1").val(retornoCliente.pessoaFisica.telefone.numero);
             $("#idEmail").val(retornoCliente.pessoaFisica.email);
+            $('#idProva').val(retornoCliente.pessoaFisica.prova);
             $("#idHabilitacao").val(retornoCliente.pessoaFisica.documentoPessoaFisica.habilitacao);
             $("#idRg").val(retornoCliente.pessoaFisica.documentoPessoaFisica.rg);
             $("#idOrgao").val(retornoCliente.pessoaFisica.documentoPessoaFisica.orgaoEmissor);
@@ -66,6 +67,7 @@ function salvarCliente() {
     var json = {
         nome: $('#idNome').val(),
         email: $("#idEmail").val(),
+        prova: $('#idProva').val(),
         endereco: {
             logradouro: $("#idRua").val(),
             numero: $("#idNumero").val(),

@@ -22,14 +22,13 @@ public class ClienteFacade {
 	JdbcDAOFactory jdbc = new JdbcDAOFactory();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+	//Busca cliente pelo código
 	public Cliente findClienteByCodigo(Integer codigo) {
-
-		// Busca no banco de dados o cliente desejado a partir do código
 
 		Cliente c = null;
 
 		try {
-			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa, p.senha_pessoa,t.numero,pf.data_nascimento,pf.sexo,dpf.cpf, dpf.data_emissao_rg, dpf.habilitacao, dpf.orgao_emissor_rg, dpf.rg,\r\n"
+			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa, p.senha_pessoa,p.prova,t.numero,pf.data_nascimento,pf.sexo,dpf.cpf, dpf.data_emissao_rg, dpf.habilitacao, dpf.orgao_emissor_rg, dpf.rg,\r\n"
 					+ "e.logradouro, e.numero_endereco, e.complemento, e.estado, e.cidade, e.bairro,e.cep\r\n"
 					+ "FROM t20wps2.tb_cliente c \r\n" + "JOIN t20wps2.tb_pf pf ON c.cod_pf = pf.cod_pf \r\n"
 					+ "JOIN t20wps2.tb_pessoa p ON p.cod_pessoa = pf.cod_pessoa\r\n"
@@ -62,7 +61,7 @@ public class ClienteFacade {
 						rs.getString("HABILITACAO"));
 
 				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"), rs.getString("NOME_PESSOA"),
-						rs.getString("EMAIL_PESSOA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
+						rs.getString("EMAIL_PESSOA"),rs.getString("PROVA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
 						rs.getString("SEXO"), documentoPessoaFisica);
 
 				c = new Cliente(rs.getInt("COD_CLIENTE"), pessoaFisica);
@@ -77,13 +76,13 @@ public class ClienteFacade {
 		}
 		return c;
 	}
-
+	//Busca cliente pelo nome
 	public List<Cliente> findClienteByName(String nome) {
 
 		List<Cliente> list = new ArrayList<Cliente>();
 
 		try {
-			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa, p.senha_pessoa,t.numero,\n"
+			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa,p.prova, p.senha_pessoa,t.numero,\n"
 					+ "pf.data_nascimento,pf.sexo,\n"
 					+ "dpf.cpf, dpf.data_emissao_rg, dpf.habilitacao, dpf.orgao_emissor_rg, dpf.rg,\n"
 					+ "e.logradouro, e.numero_endereco, e.complemento, e.estado, e.cidade, e.bairro,e.cep\n"
@@ -114,7 +113,7 @@ public class ClienteFacade {
 						rs.getString("HABILITACAO"));
 
 				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"), rs.getString("NOME_PESSOA"),
-						rs.getString("EMAIL_PESSOA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
+						rs.getString("EMAIL_PESSOA"),rs.getString("PROVA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
 						rs.getString("SEXO"), documentoPessoaFisica);
 
 				Cliente cliente = new Cliente(rs.getInt("COD_CLIENTE"), pessoaFisica);
@@ -131,13 +130,13 @@ public class ClienteFacade {
 		}
 		return list;
 	}
-
+	//Lista todos os clientes
 	public List<Cliente> findAllClientes() {
 
 		List<Cliente> list = new ArrayList<Cliente>();
 
 		try {
-			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa, p.senha_pessoa,t.numero,\n"
+			String sql = "SELECT c.cod_cliente, p.cod_pessoa,dpf.cod_documento_pf, p.nome_pessoa, p.email_pessoa,p.prova, p.senha_pessoa,t.numero,\n"
 					+ "pf.data_nascimento,pf.sexo,\n"
 					+ "dpf.cpf, dpf.data_emissao_rg, dpf.habilitacao, dpf.orgao_emissor_rg, dpf.rg,\n"
 					+ "e.logradouro, e.numero_endereco, e.complemento, e.estado, e.cidade, e.bairro,e.cep\n"
@@ -168,7 +167,7 @@ public class ClienteFacade {
 						rs.getString("HABILITACAO"));
 
 				PessoaFisica pessoaFisica = new PessoaFisica(rs.getInt("COD_PESSOA"), rs.getString("NOME_PESSOA"),
-						rs.getString("EMAIL_PESSOA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
+						rs.getString("EMAIL_PESSOA"),rs.getString("PROVA"), rs.getString("SENHA_PESSOA"), endereco, telefone, dtNascimento,
 						rs.getString("SEXO"), documentoPessoaFisica);
 
 				Cliente cliente = new Cliente(rs.getInt("COD_CLIENTE"), pessoaFisica);
@@ -184,7 +183,7 @@ public class ClienteFacade {
 		}
 		return list;
 	}
-
+	//Adiciona um novo cliente
 	public boolean addCliente(PessoaFisica pf) throws ParseException, SQLException {
 
 		Cliente cliente = new Cliente();
@@ -201,8 +200,8 @@ public class ClienteFacade {
 
 		String sqlInsertPessoaF = "INSERT INTO T20WPS2.tb_pf (cod_documento_pf, data_nascimento, sexo,cod_pessoa) VALUES (?,?,?,?)";
 
-		String sqlInsertPessoa = "INSERT INTO T20WPS2.tb_pessoa (nome_pessoa, email_pessoa, senha_pessoa)"
-				+ "VALUES (?,?,?)";
+		String sqlInsertPessoa = "INSERT INTO T20WPS2.tb_pessoa (nome_pessoa, email_pessoa,senha_pessoa, prova)"
+				+ "VALUES (?,?,?,?)";
 
 		String sqlInsertCliente = "INSERT INTO T20WPS2.tb_cliente (cod_pf, cod_pj, data_cadastro)" + "VALUES (?,?,?)";
 
@@ -236,6 +235,8 @@ public class ClienteFacade {
 			ps.setString(1, pf.getNome());
 			ps.setString(2, pf.getEmail());
 			ps.setString(3, pf.getSenha());
+			ps.setString(4, pf.getProva());
+			
 			ps.execute();
 
 			rs = psCod.executeQuery();
@@ -312,7 +313,7 @@ public class ClienteFacade {
 		}
 
 	}
-
+	//Deleta Cliente pelo codigo
 	public boolean deleteCliente(Integer codigo) {
 
 		try {
@@ -335,12 +336,12 @@ public class ClienteFacade {
 		}
 
 	}
-
+	//Atualiza cliente no banco
 	public boolean updateCliente(PessoaFisica pf, Integer codigo) {
 
 		try {
 
-			String sql = "{ call T20WPS2.UPDATE_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
+			String sql = "{ call T20WPS2.UPDATE_CLIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
 
 			CallableStatement cs = jdbc.getConexao().prepareCall(sql);
 
@@ -358,7 +359,7 @@ public class ClienteFacade {
 			cs.setString(12, pf.getDocumentoPessoaFisica().getCpf());
 			cs.setString(13, pf.getDocumentoPessoaFisica().getRg());
 			cs.setString(14, pf.getDocumentoPessoaFisica().getHabilitacao());
-
+			cs.setString(15, pf.getProva());
 			cs.execute();
 
 			cs.close();

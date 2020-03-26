@@ -17,7 +17,21 @@
 	href="source/font-awesome-4.5.0/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="style/slider.css">
 <link rel="stylesheet" type="text/css" href="style/mystyle.css">
+<script defer src="source/fontawesome-free-5.12.1-web/js/all.js"></script>
+<style type="text/css">
 
+.btn {
+	margin: 5px;
+}
+a:link {
+	color: black;
+}
+
+a:visited {
+	color: black;
+}
+
+</style>
 </head>
 <body>
 	<!-- Header -->
@@ -185,16 +199,35 @@
 			</nav>
 		</div>
 	</div>
-
-	<form action="">
 	
-		<table id="idTbCarro" class="table table-sm table-bordered table-condensed table-hover"></table>
+	<div class="container-xl">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-6">
+				<a href="novo_carro.jsp"><button type="button"
+						class="btn btn-primary">Novo Carro</button></a>
+			</div>		
+		</div>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<table id="idTbCarro" class="table table-striped table-bordered table-condensed table-hover"></table>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+	
+	
+	
+	<form action="">
 		
-		<select name="tipoCarro" id="idTipoCarro" class="w-25 p-3" style ="margin: 10px" onchange="buscaValor();"></select>
-		<span name="textoValor"> Valor da diária = </span>
-	    <input type="text"  id="idValorCarro" class="w-25 p-3" style ="margin: 10px" >
-	    <a href="cadastro.jsp" target="_self"><input type="button" id="idButtonOk" value="OK" onclick=></a>
-	    
+		<div class="row">
+			<div class="col-md-2"></div>
+			<select class="col-md-2" name="tipoCarro" id="idCbxCarro" class="w-25 p-3" style ="margin: 10px" onchange="buscaValor();"></select>
+			<span name="textoValor"> Valor da diária = </span>
+		    <input type="text"  id="idValorCarro" class="w-25 p-3" style ="margin: 10px" disabled="disabled">
+		    <a href="cadastro.jsp" target="_self"><input type="button" id="idButtonOk" value="OK" onclick=></a>
+		</div>	  
 	</form>
 	
 	<script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>

@@ -7,6 +7,10 @@ public class CategoriaCarro {
 	private Integer codCategoria;
 	private String descricao;
 	
+	public CategoriaCarro(Integer codCategoria, String descricao) {
+		this.codCategoria = codCategoria;
+		this.descricao = descricao;
+	}
 	
 	//Getters and Setters
 	public Integer getCodigo() {

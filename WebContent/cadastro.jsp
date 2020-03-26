@@ -71,7 +71,6 @@ button {
 			<div class="col-md-5">
 				<table id="idTbClientes" class="table table-striped table-bordered table-condensed table-hover"></table>
 			</div>
-
 		</div>
 
 		
